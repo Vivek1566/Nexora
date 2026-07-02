@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Messaging</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#b4c5ff",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#283044",
+                      "surface-container-low": "#131b2e",
+                      "on-tertiary-container": "#c1ffc5",
+                      "tertiary": "#4ae176",
+                      "outline-variant": "#434655",
+                      "surface-container": "#171f33",
+                      "on-secondary-container": "#c4abff",
+                      "surface-container-lowest": "#060e20",
+                      "outline": "#8d90a0",
+                      "on-error-container": "#ffdad6",
+                      "primary": "#b4c5ff",
+                      "secondary-container": "#571bc1",
+                      "on-secondary-fixed": "#23005c",
+                      "surface-variant": "#2d3449",
+                      "primary-fixed": "#dbe1ff",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "inverse-primary": "#0053db",
+                      "on-tertiary-fixed": "#002109",
+                      "on-background": "#dae2fd",
+                      "primary-container": "#2563eb",
+                      "on-primary-container": "#eeefff",
+                      "on-primary": "#002a78",
+                      "surface-container-highest": "#2d3449",
+                      "on-surface": "#dae2fd",
+                      "on-surface-variant": "#c3c6d7",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "secondary-fixed": "#e9ddff",
+                      "tertiary-fixed": "#6bff8f",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "secondary": "#d0bcff",
+                      "on-secondary": "#3c0091",
+                      "on-tertiary": "#003915",
+                      "inverse-surface": "#dae2fd",
+                      "surface": "#0b1326",
+                      "background": "#0b1326",
+                      "tertiary-container": "#007e37",
+                      "on-primary-fixed": "#00174b",
+                      "surface-dim": "#0b1326",
+                      "surface-container-high": "#222a3d",
+                      "surface-bright": "#31394d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "display-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-base": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-base": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #434655;
+        }
+        
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-bubble-received {
+            background: rgba(45, 52, 73, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-bubble-sent {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.8) 0%, rgba(87, 27, 193, 0.8) 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base h-screen overflow-hidden flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Anchor (Visible on Mobile, Hidden on Desktop to favor SideNav) -->
+<nav class="md:hidden flex justify-between items-center px-margin-mobile py-4 bg-surface/80 backdrop-blur-md border-b border-outline-variant/10 fixed top-0 w-full z-50">
+<span class="font-headline-md text-headline-md tracking-tighter text-primary">LaunchNest</span>
+<button class="text-on-surface-variant p-2 rounded-lg hover:bg-surface-variant/30 transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</nav>
+<!-- Shared Component: SideNavBar (Fixed to the left) -->
+<aside class="hidden md:flex flex-col p-6 gap-2 fixed left-0 top-0 h-screen w-[280px] bg-surface-container-low/50 backdrop-blur-xl border-r border-outline-variant/10 shadow-xl z-40 transition-all duration-300">
+<!-- Header -->
+<div class="mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-primary-container/20 flex items-center justify-center border border-primary/20 shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+<span class="material-symbols-outlined text-primary" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface leading-none tracking-tight">LaunchNest</h1>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Incubation Portal</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-mono text-label-mono">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-label-mono text-label-mono">Portfolio</span>
+</a>
+<!-- Active State Navigation -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold shadow-[0_0_20px_rgba(37,99,235,0.2)] scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-mono text-label-mono">Network</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-label-mono text-label-mono">Sessions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+</nav>
+<!-- CTA & Footer -->
+<div class="mt-auto flex flex-col gap-4">
+<button class="w-full py-3 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-white font-label-mono text-label-mono font-bold shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:shadow-[0_0_25px_rgba(37,99,235,0.6)] hover:brightness-110 transition-all duration-300 relative overflow-hidden group">
+<span class="relative z-10">Apply for Funding</span>
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+</button>
+<div class="flex flex-col gap-1 border-t border-outline-variant/20 pt-4">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+<span class="font-label-mono text-label-mono">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-error transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+<span class="font-label-mono text-label-mono">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Application Canvas -->
+<main class="flex-1 flex ml-0 md:ml-[280px] pt-[72px] md:pt-0 h-screen overflow-hidden relative bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-surface-container-high/40 via-background to-background">
+<!-- Ambient Background Effect -->
+<div class="absolute top-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- Conversations Sidebar -->
+<div class="w-full md:w-[320px] lg:w-[380px] h-full flex flex-col border-r border-outline-variant/10 glass-panel shrink-0 transition-transform duration-300" id="conversations-panel">
+<!-- Search & Filter Header -->
+<div class="p-6 border-b border-outline-variant/10 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Messages</h2>
+<button class="w-8 h-8 rounded-full bg-surface-variant/50 flex items-center justify-center hover:bg-primary-container/20 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit_square">edit_square</span>
+</button>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-lg pl-10 pr-4 py-2.5 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:ring-1 focus:ring-primary focus:bg-surface-container-high/80 transition-all shadow-inner" placeholder="Search contacts..." type="text"/>
+</div>
+</div>
+<!-- Conversation List -->
+<div class="flex-1 overflow-y-auto p-2">
+<!-- Active Conversation Item -->
+<button class="w-full flex items-center gap-3 p-3 rounded-xl bg-surface-variant/40 border border-outline-variant/20 relative group text-left mb-1 overflow-hidden">
+<div class="absolute left-0 top-2 bottom-2 w-1 bg-primary rounded-r-full shadow-[0_0_10px_rgba(180,197,255,0.8)]"></div>
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant/30" data-alt="A professional headshot portrait of an Asian male executive in his 40s, wearing a tailored dark navy suit and white shirt, photographed against a sleek, modern glass office background. Cinematic lighting, soft shadows, 85mm lens, corporate tech aesthetic, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUDhoo1S7w1V93RDUfzJdv_Zjp8KLIC8VhcPVEBErfGlYThF_o9lLkr_UXEvbTYVAXeHl8QCzHsmS-xB0dJX6xscEaPS30mbchHByVx-2FvLPvL_u85m15FWAAsxSWUrMavIJJPs_UKJ3cy8q-asUFYFbkamBCdJOORI6zZXLbwhFVhR5HoK-7t0M7qno8rixQLKQJD0xrxD_btqcfN2axM-znt4556_3EJ_jhg6Y-TvDd8X7mtOur_BatCEvRaqd7YYB4UQDZk8I"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-tertiary rounded-full border-2 border-surface-container-high shadow-[0_0_5px_rgba(74,225,118,0.5)]"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-body-base text-body-base font-semibold text-on-surface truncate">Marcus Chen</span>
+<span class="font-label-mono text-label-mono text-primary text-[10px]">Just now</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Let's review the Q3 projections tomorrow.</p>
+</div>
+</button>
+<!-- Inactive Conversation Item -->
+<button class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-surface-container-high/50 border border-transparent transition-colors text-left mb-1 group">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant/30 group-hover:border-outline-variant/50 transition-colors" data-alt="A professional headshot portrait of a Black female software engineer in her late 20s, wearing glasses and a minimalist black turtleneck, smiling warmly. The background is a slightly blurred modern tech workspace with subtle neon blue and violet lighting accents. Crisp, professional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcDB6OqrP35jK6AgB21HKAhOFiKqhoYQ1DOJC37-vUqXJvU6K03Yn9etnd9RNjhnvnT22MxOJTghAiu6LjjrUyLEUG6W5lY-B5cn4FVebDgDSPGQj-P3X-HBu4C_c0jJk6n7r5-cCPzWtSgnrUALNhUqK-BSCU2Qw-kfarVx9moSa30YFKGNqCJQESrUsIoPj9t1nEb2N0z9oY8heQjUG0_1ReiHQRlE72_vUSrVJxblU1rzux2UarRZ3yO55YzS_78Kbonba2jhs"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-surface-variant rounded-full border-2 border-surface flex items-center justify-center">
+<span class="w-1.5 h-1.5 bg-outline rounded-full"></span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-body-base text-body-base font-medium text-on-surface group-hover:text-primary-fixed-dim transition-colors truncate">Elena Rostova</span>
+<span class="font-label-mono text-label-mono text-outline text-[10px]">2h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline truncate">The API integration is complete.</p>
+</div>
+</button>
+<!-- Unread Conversation Item -->
+<button class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-surface-container-high/50 border border-transparent transition-colors text-left mb-1 group">
+<div class="relative">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 border border-secondary-container/40 flex items-center justify-center text-secondary font-headline-md">
+                            TS
+                        </div>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-tertiary rounded-full border-2 border-surface shadow-[0_0_5px_rgba(74,225,118,0.5)]"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-body-base text-body-base font-bold text-on-surface truncate">Tech Syndicate</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant text-[10px]">Yesterday</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium truncate">Attached the updated term sheet.</p>
+</div>
+<div class="w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-mono text-[10px] shadow-[0_0_10px_rgba(37,99,235,0.4)]">
+                        2
+                    </div>
+</button>
+</div>
+</div>
+<!-- Main Chat Area -->
+<section class="flex-1 flex flex-col min-w-0 relative bg-surface-container-lowest/30">
+<!-- Chat Header -->
+<header class="h-20 px-6 border-b border-outline-variant/10 flex items-center justify-between glass-panel z-10">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant p-2 -ml-2 rounded-lg hover:bg-surface-variant/30" onclick="document.getElementById('conversations-panel').classList.toggle('-translate-x-full');">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="relative hidden sm:block">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant/30" data-alt="A professional headshot portrait of an Asian male executive in his 40s, wearing a tailored dark navy suit and white shirt, photographed against a sleek, modern glass office background. Cinematic lighting, soft shadows, 85mm lens, corporate tech aesthetic, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRTHzMhVrHEAKlxo_JPBTjL8mREDQK_BD8I0F3jyyjf_EIyi8JMR7rFM3FxKDPHg3beVIfm_0qBBG8A51xD2VL68k_ErZ9x6jl-r03UHlhAzELIcyHeNyNauocBGmEduG5XeTPdBFf0zskCjft8WdsmK1_DWdYcdN2mGLQMMivy6RVfutxJBgN7a4Ew8YfXf0ZoxMDvEBUFKLVkEH2XlNiKrEOvCaIZcFkzacirG5cLKYSAMb0f0YFyJUjWGFWMPaUeWC0j24L-_o"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary rounded-full border-2 border-surface-container-high shadow-[0_0_5px_rgba(74,225,118,0.5)]"></div>
+</div>
+<div>
+<h2 class="font-body-base text-body-base font-semibold text-on-surface flex items-center gap-2">
+                            Marcus Chen
+                            <span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/20 font-label-mono text-[10px] tracking-wider uppercase">Investor</span>
+</h2>
+<span class="font-body-sm text-body-sm text-tertiary-fixed-dim flex items-center gap-1 opacity-80">
+                            Online
+                        </span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-variant/40 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-variant/40 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/30 mx-2"></div>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-variant/40 hover:text-primary transition-colors" id="toggle-info-btn">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</button>
+</div>
+</header>
+<!-- Message History Container -->
+<div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6" id="message-container">
+<!-- Date Divider -->
+<div class="flex items-center justify-center my-4">
+<div class="px-4 py-1 rounded-full bg-surface-container-high/50 border border-outline-variant/20 font-label-mono text-[10px] text-outline tracking-wider backdrop-blur-sm">
+                        TODAY, 10:42 AM
+                    </div>
+</div>
+<!-- Received Message -->
+<div class="flex items-end gap-3 max-w-[85%] self-start">
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant/20 hidden sm:block mb-1" data-alt="A professional headshot portrait of an Asian male executive in his 40s, wearing a tailored dark navy suit and white shirt, photographed against a sleek, modern glass office background. Cinematic lighting, soft shadows, 85mm lens, corporate tech aesthetic, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANkFdfdQwLwzG_oD7ViCruMCkxitHbXWeoE5KN_2hBCPw1B57bAQhpL51TvQMHZ1mbghWy6RTRmmCZ_gdREx38q06c675lamuoa3dAd6CDYrQ6G3913ypjEMll_EItFIGBqER6xxLNnIZottAfQyBIWMm6261DVk3GZoN_RVqfLg0y1yNC8AwdpODwrC9dov5lqF185gfb58G9S3gp-7Qi6UCgdSSv5AmLgdPdk8XaoxPcs0ygZ1PVCEMfeOiwKz-D-GBHJ_JmfN8"/>
+<div class="flex flex-col gap-1">
+<span class="font-label-mono text-[10px] text-outline ml-1">Marcus Chen</span>
+<div class="glass-bubble-received rounded-2xl rounded-bl-sm px-4 py-3 text-on-surface font-body-sm shadow-sm">
+<p>I've reviewed the latest cap table model you sent over. The dilution projections look much better in this iteration.</p>
+</div>
+</div>
+</div>
+<!-- Received Message (Sequential) -->
+<div class="flex items-end gap-3 max-w-[85%] self-start">
+<div class="w-8 hidden sm:block"></div> <!-- Spacer for avatar -->
+<div class="flex flex-col gap-1">
+<div class="glass-bubble-received rounded-2xl rounded-tl-sm rounded-bl-sm px-4 py-3 text-on-surface font-body-sm shadow-sm">
+<p>Can we schedule a quick sync to finalize the Series A terms before the board meeting?</p>
+</div>
+</div>
+</div>
+<!-- Sent Message -->
+<div class="flex items-end gap-3 max-w-[85%] self-end">
+<div class="flex flex-col gap-1 items-end">
+<div class="glass-bubble-sent rounded-2xl rounded-br-sm px-4 py-3 text-white font-body-sm">
+<p>Absolutely. I'm glad the new model aligns better with the growth targets.</p>
+</div>
+</div>
+</div>
+<!-- Sent Message with Attachment (Document) -->
+<div class="flex items-end gap-3 max-w-[85%] self-end mt-1">
+<div class="flex flex-col gap-1 items-end">
+<div class="glass-bubble-sent rounded-2xl rounded-tr-sm rounded-br-sm p-1 text-white font-body-sm">
+<div class="flex items-center gap-3 bg-background/20 p-3 rounded-xl border border-white/10 hover:bg-background/30 transition-colors cursor-pointer backdrop-blur-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-tint/20 flex items-center justify-center text-surface-tint">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm font-semibold">Series_A_Term_Sheet_v3.pdf</span>
+<span class="font-label-mono text-[10px] text-white/70">2.4 MB • PDF</span>
+</div>
+<span class="material-symbols-outlined text-white/50 ml-2" data-icon="download">download</span>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-1 text-primary-fixed-dim/70">
+<span class="font-label-mono text-[10px]">11:05 AM</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="done_all">done_all</span>
+</div>
+</div>
+</div>
+<!-- Received Message (Typing Indicator) -->
+<div class="flex items-end gap-3 max-w-[85%] self-start mt-2">
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant/20 hidden sm:block mb-1 opacity-50" data-alt="A professional headshot portrait of an Asian male executive in his 40s, wearing a tailored dark navy suit and white shirt, photographed against a sleek, modern glass office background. Cinematic lighting, soft shadows, 85mm lens, corporate tech aesthetic, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdFa-0G9CAsGiq2D9aYCeFNo7bOSz4Uoc49LmfeFQTLKxHeMpwfPJNU0D_Usteo776hkDsK6X58J0TRCh8CtuRx7FzHx8aknraD9LTLi9iCbM6l3JhhAwpMHpFQlo2oJImhZSKQqWlbX6GZMpuvC5kOGdAyDtUDtfwBqLmN6phJtmXwTqQxbXWChScawFGKqDl6SjG5WsPqAdlVXJAHh4NNeXZqfW2K8OPtw8xj-Ocj0_Ti8jga-raCNV8WxKb5l8ooVfBLu_euDI"/>
+<div class="glass-bubble-received rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex items-center gap-1 h-[44px]">
+<div class="w-1.5 h-1.5 rounded-full bg-on-surface-variant animate-bounce" style="animation-delay: 0ms;"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-on-surface-variant animate-bounce" style="animation-delay: 150ms;"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-on-surface-variant animate-bounce" style="animation-delay: 300ms;"></div>
+</div>
+</div>
+<!-- Spacer for bottom padding -->
+<div class="h-4"></div>
+</div>
+<!-- Input Area -->
+<div class="p-4 bg-surface-container-low/80 backdrop-blur-md border-t border-outline-variant/10 relative z-20">
+<div class="flex items-end gap-2 bg-surface-container rounded-2xl border border-outline-variant/20 p-2 shadow-inner focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
+<!-- Formatting / Attach Buttons -->
+<div class="flex gap-1 mb-1 ml-1">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:bg-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add_circle">add_circle</span>
+</button>
+</div>
+<!-- Textarea -->
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 resize-none font-body-sm text-body-sm text-on-surface placeholder:text-outline py-2.5 max-h-[120px] min-h-[44px]" oninput="this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 120) + 'px'" placeholder="Type a message..." rows="1"></textarea>
+<!-- Right Actions -->
+<div class="flex gap-1 mb-1 mr-1">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:bg-surface-variant hover:text-primary transition-colors hidden sm:flex">
+<span class="material-symbols-outlined text-[20px]" data-icon="mood">mood</span>
+</button>
+<button class="w-10 h-10 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-primary-fixed-variant transition-colors shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)]">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+<!-- Mini footer hint -->
+<div class="flex justify-between items-center mt-2 px-2">
+<span class="font-label-mono text-[10px] text-outline">Press Enter to send, Shift+Enter for new line</span>
+<span class="font-label-mono text-[10px] text-outline flex items-center gap-1"><span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span> End-to-end encrypted</span>
+</div>
+</div>
+</section>
+<!-- Right Side Info Panel (Toggleable) -->
+<aside class="w-[280px] lg:w-[320px] h-full border-l border-outline-variant/10 glass-panel shrink-0 flex flex-col absolute right-0 translate-x-full transition-transform duration-300 z-30 shadow-[-10px_0_30px_rgba(0,0,0,0.5)]" id="info-panel">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface/50 backdrop-blur-md">
+<h3 class="font-headline-md text-base font-semibold text-on-surface">Contact Info</h3>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" onclick="document.getElementById('info-panel').classList.add('translate-x-full');">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Profile Summary -->
+<div class="p-6 flex flex-col items-center border-b border-outline-variant/10 text-center">
+<img class="w-24 h-24 rounded-full object-cover border-2 border-outline-variant/30 mb-4 shadow-lg" data-alt="A professional headshot portrait of an Asian male executive in his 40s, wearing a tailored dark navy suit and white shirt, photographed against a sleek, modern glass office background. Cinematic lighting, soft shadows, 85mm lens, corporate tech aesthetic, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcHFFbVPOC4fJH4yZkLKy7IVdr6BSiLPJrnkzSnPUYGh7MUIvXNVQlr6u9fWQkOznoeYwWeyskuZ-727TU9AKvXEI0pd_uvRuS87OqGAOdU6Gupn4tkNFqxr9G5fXGwEm9_1pjA3Wmi9xzgUTIZey-0j-I-0M-HZQ6NxGGpT9GyXs3prfk1pZqvosoPKdwgVEBKt26NhY8xBZVG1MHKoAbAxlXmaFKnbJRYc9J1lB32u2KcnT-KjZTRyMCo9bEdmwCe9y3a-sLU8g"/>
+<h4 class="font-body-base font-semibold text-on-surface text-lg">Marcus Chen</h4>
+<span class="font-body-sm text-outline mb-4">Managing Partner @ Apex Ventures</span>
+<div class="flex gap-2 w-full">
+<button class="flex-1 py-2 rounded-lg bg-surface-variant hover:bg-surface-variant/80 text-on-surface font-label-mono text-[11px] transition-colors flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="person">person</span>
+                            Profile
+                        </button>
+<button class="flex-1 py-2 rounded-lg bg-surface-variant hover:bg-surface-variant/80 text-on-surface font-label-mono text-[11px] transition-colors flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="notifications_off">notifications_off</span>
+                            Mute
+                        </button>
+<button class="flex-1 py-2 rounded-lg bg-surface-variant hover:bg-surface-variant/80 text-error font-label-mono text-[11px] transition-colors flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="block">block</span>
+                            Block
+                        </button>
+</div>
+</div>
+<!-- Shared Assets Accordions -->
+<div class="p-4 flex flex-col gap-2">
+<!-- Documents -->
+<div class="rounded-xl border border-outline-variant/20 bg-surface-container-low/50 overflow-hidden">
+<button class="w-full flex justify-between items-center p-4 text-on-surface hover:bg-surface-variant/30 transition-colors">
+<span class="font-body-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="folder">folder</span>
+                                Shared Documents
+                            </span>
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="expand_more">expand_more</span>
+</button>
+<div class="p-4 pt-0 flex flex-col gap-2 border-t border-outline-variant/10 mt-2">
+<a class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant/50 transition-colors group" href="#">
+<div class="w-8 h-8 rounded bg-surface-tint/10 flex items-center justify-center text-surface-tint">
+<span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-body-sm text-[13px] text-on-surface truncate group-hover:text-primary transition-colors">Series_A_Term_Sheet_v3.pdf</p>
+<p class="font-label-mono text-[10px] text-outline">Oct 12 • 2.4 MB</p>
+</div>
+</a>
+<a class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant/50 transition-colors group" href="#">
+<div class="w-8 h-8 rounded bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[16px]" data-icon="table">table</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-body-sm text-[13px] text-on-surface truncate group-hover:text-primary transition-colors">Cap_Table_Projections.xlsx</p>
+<p class="font-label-mono text-[10px] text-outline">Oct 10 • 1.1 MB</p>
+</div>
+</a>
+</div>
+</div>
+<!-- Links -->
+<div class="rounded-xl border border-outline-variant/20 bg-surface-container-low/50 overflow-hidden">
+<button class="w-full flex justify-between items-center p-4 text-on-surface hover:bg-surface-variant/30 transition-colors">
+<span class="font-body-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary" data-icon="link">link</span>
+                                Shared Links
+                            </span>
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<script>
+        // Simple toggle for the info panel
+        document.getElementById('toggle-info-btn').addEventListener('click', function() {
+            document.getElementById('info-panel').classList.toggle('translate-x-full');
+        });
+    </script>
+</body></html>

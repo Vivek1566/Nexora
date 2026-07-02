@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Watchlist &amp; Alerts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed": "#6bff8f",
+                    "inverse-primary": "#0053db",
+                    "surface": "#0b1326",
+                    "on-secondary": "#3c0091",
+                    "surface-container-lowest": "#060e20",
+                    "secondary-fixed": "#e9ddff",
+                    "on-tertiary-container": "#c1ffc5",
+                    "inverse-surface": "#dae2fd",
+                    "on-surface": "#dae2fd",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#003915",
+                    "secondary-container": "#571bc1",
+                    "surface-dim": "#0b1326",
+                    "primary-container": "#2563eb",
+                    "tertiary-container": "#007e37",
+                    "outline": "#8d90a0",
+                    "tertiary": "#4ae176",
+                    "on-primary": "#002a78",
+                    "outline-variant": "#434655",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "surface-container-low": "#131b2e",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed": "#002109",
+                    "on-surface-variant": "#c3c6d7",
+                    "on-primary-fixed": "#00174b",
+                    "surface-container-high": "#222a3d",
+                    "surface-variant": "#2d3449",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "inverse-on-surface": "#283044",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "primary": "#b4c5ff",
+                    "on-background": "#dae2fd",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "on-error": "#690005",
+                    "surface-container": "#171f33",
+                    "surface-bright": "#31394d",
+                    "on-primary-container": "#eeefff",
+                    "surface-container-highest": "#2d3449",
+                    "surface-tint": "#b4c5ff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-secondary-fixed": "#23005c",
+                    "on-secondary-container": "#c4abff",
+                    "secondary": "#d0bcff",
+                    "background": "#0b1326"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "container-max": "1440px",
+                    "margin-desktop": "40px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Geist"],
+                    "body-sm": ["Geist"],
+                    "body-base": ["Geist"],
+                    "label-mono": ["JetBrains Mono"],
+                    "headline-md": ["Geist"],
+                    "display-lg-mobile": ["Geist"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #020617; /* Fallback for deep dark */
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+        .top-edge-highlight {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .primary-glow:hover {
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- Top Navigation (Desktop) -->
+<nav class="hidden md:flex bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-white/10 shadow-lg shadow-surface-container-lowest/50 justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto h-[72px]">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-display-lg font-bold text-primary tracking-tighter">LaunchNest</span>
+<div class="flex gap-6 items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Portfolio</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Discovery</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 active:scale-95 transition-transform" href="#">Watchlist</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Messages</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="bg-gradient-to-r from-primary-container to-secondary-container text-white px-4 py-2 rounded-lg font-medium hover:brightness-110 shadow-[0_0_15px_rgba(87,27,193,0.3)] transition-all">Invest Now</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-white/20">
+<img alt="Investor Profile" class="object-cover w-full h-full" data-alt="A professional headshot of an investor, well lit studio lighting, corporate yet modern tech vibe, high resolution, dark mode compatible background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAquNIXVuOvmY-vZ1QVliYxvXElRBemiXwVkHIpvQ9bRkpHezB9-jwoRyrPjzh4c_xKzd0VNHUcPotmeN1RcWNz1wzxn76PGD-EqAkVwmeDOrj_bW1goXspsWfiS5e9cJBETDUlXe6kpLITXppNZ4uXbqn2qesMm6KZ1Rvs4V0ZrG7yJCIR3HcoG6YoR19padHw9R6HC1ru7PtVGv6G24MuK4IDArhj74tDhHSnOwU4_USIxZ64K6jyHuT8HwDi6gc8sWv1mbQz3NY"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation (Desktop Dashboard - Optional based on layout needs, keeping TopNav as primary per JSON priority, but showing SideNav structure for robust dashboard feel) -->
+<!-- Suppressed SideNav for this focused view to prioritize the canvas, adhering to "Canvas priority" principles when robust data is needed, relying on TopNav -->
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto pt-[88px] px-margin-mobile md:px-margin-desktop pb-24">
+<!-- Header Section -->
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Watchlist &amp; Alerts</h1>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-2xl">Monitor high-potential startups. Track milestone completions, funding announcements, and proprietary AI score shifts to time your investments.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="glass-panel px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-outline">filter_list</span>
+<span class="font-body-sm text-body-sm">Filter</span>
+</button>
+<button class="glass-panel px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-outline">sort</span>
+<span class="font-body-sm text-body-sm">Sort by Alert Level</span>
+</button>
+</div>
+</header>
+<!-- Main Layout: Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Left Column: The Watchlist (Takes up 8 columns) -->
+<div class="xl:col-span-8 flex flex-col gap-4">
+<!-- Watchlist Item 1 (High Alert) -->
+<article class="glass-panel top-edge-highlight rounded-xl p-6 primary-glow transition-all duration-300 relative overflow-hidden group cursor-pointer">
+<!-- Alert indicator ambient -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-error/10 blur-[50px] -mr-10 -mt-10 pointer-events-none"></div>
+<div class="flex flex-col md:flex-row gap-6">
+<!-- Company Info -->
+<div class="flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-container-high border border-white/10 shrink-0">
+<img alt="Company Logo" class="object-cover w-full h-full" data-alt="A sleek, modern startup logo featuring an abstract geometric shape in bright neon green against a dark background, representing clean energy tech." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw_G2DJ3CBS8VAZIxf_3g8qB4cVd9kOWOpdiebsR-acNX6Aq9Q2PMU-qrXgkTE3zVWUG-Zy23Qfoav-GbgJyg_5BgWjyazBNYo4byUIwRk3Px-S2c_RqLM6hLmjq4ChbaZQrUdFcpR3yCpsPl_OJEaxj7Q5KDlDIMRODkPVWZMv9U1iXSyCsRMNRXm7v2oCFAxEPVghT43hymriuelMrcXparojsmZToJkXWxpW23u5HbkV986SA3oRNUrKtuC-0NXEFPtf02sa6g"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+                                            AeroFlow Tech
+                                            <span class="material-symbols-outlined text-tertiary text-[18px]">verified</span>
+</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-mono text-label-mono text-tertiary-fixed bg-tertiary-fixed/10 px-2 py-0.5 rounded-full">Cleantech</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">• Series A</span>
+</div>
+</div>
+</div>
+<!-- AI Score -->
+<div class="text-right">
+<div class="font-label-mono text-label-mono text-outline mb-1">AI SCORE</div>
+<div class="font-headline-md text-headline-md text-tertiary flex items-center justify-end gap-1">
+                                        94
+                                        <span class="material-symbols-outlined text-[16px]">trending_up</span>
+</div>
+</div>
+</div>
+<!-- Real-time Alerts -->
+<div class="bg-error/10 border border-error/20 rounded-lg p-3 mb-4 flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-0.5">campaign</span>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-error-container">New Funding Round Rumored</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Multiple sources indicate term sheets are being finalized for a $15M Series A. Lead investor undisclosed.</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-4">
+<div>
+<p class="font-label-mono text-label-mono text-outline">RUNWAY</p>
+<p class="font-body-base text-body-base text-on-surface">14 Months</p>
+</div>
+<div>
+<p class="font-label-mono text-label-mono text-outline">MO. BURN</p>
+<p class="font-body-base text-body-base text-on-surface">$250k</p>
+</div>
+<div>
+<p class="font-label-mono text-label-mono text-outline">LAST CONTACT</p>
+<p class="font-body-base text-body-base text-on-surface">12 days ago</p>
+</div>
+</div>
+</div>
+<!-- Notes Section (Right side of item) -->
+<div class="md:w-64 flex flex-col border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
+<div class="flex justify-between items-center mb-2">
+<h4 class="font-label-mono text-label-mono text-outline">INVESTOR NOTES</h4>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest/50 rounded p-3 flex-1 overflow-y-auto custom-scrollbar font-body-sm text-body-sm text-on-surface-variant">
+                                Strong tech, but concerned about CAC in their recent pilot. Need to see Q3 retention numbers before committing to the A round. The rumored term sheets might force our hand early.
+                            </div>
+<button class="mt-3 w-full py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg font-body-sm text-body-sm text-on-surface transition-colors">
+                                Schedule Follow-up
+                            </button>
+</div>
+</div>
+</article>
+<!-- Watchlist Item 2 (Milestone Alert) -->
+<article class="glass-panel top-edge-highlight rounded-xl p-6 primary-glow transition-all duration-300 relative overflow-hidden group cursor-pointer opacity-90 hover:opacity-100">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-[50px] -mr-10 -mt-10 pointer-events-none"></div>
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-container-high border border-white/10 shrink-0">
+<img alt="Company Logo" class="object-cover w-full h-full" data-alt="A minimalist tech logo, a stylized 'Q' in deep purple and soft blue gradients, representing a quantum computing startup, dark theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzyGdhIg1r4Q7bi_JA771SbUiRO36mbJD_Tn4ZBP-cUvsGfQ5gjAzyhstITARPF897uwKJrQCS3wCUUbK6G_lhKQ-AUohXrVZc_iS-M7_Bli_X2kzDcIpULVL1UY8DL2AruPMVgPVj02_m8pBgoZkLpUa1xk1yTSdOh5dKPzh7Uy5RtjvFzYUhuT2UFeT4SgzPeAtL0LzNstqt-zkNH2SfT574Wp65Ezsyi6t1svgg3b06oUPl0gxoFQxiZk8jpVIlj8a612m1QVU"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+                                            QubitCore
+                                        </h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-mono text-label-mono text-secondary-fixed bg-secondary-fixed/10 px-2 py-0.5 rounded-full">Deep Tech</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">• Seed</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-mono text-label-mono text-outline mb-1">AI SCORE</div>
+<div class="font-headline-md text-headline-md text-primary flex items-center justify-end gap-1">
+                                        82
+                                        <span class="material-symbols-outlined text-[16px]">horizontal_rule</span>
+</div>
+</div>
+</div>
+<!-- Real-time Alerts -->
+<div class="bg-secondary/10 border border-secondary/20 rounded-lg p-3 mb-4 flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-0.5">flag</span>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-secondary-fixed">Milestone Achieved: Alpha Release</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Successfully deployed their first 10-qubit simulation environment to private beta testers.</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-4">
+<div>
+<p class="font-label-mono text-label-mono text-outline">RUNWAY</p>
+<p class="font-body-base text-body-base text-on-surface">8 Months</p>
+</div>
+<div>
+<p class="font-label-mono text-label-mono text-outline">MO. BURN</p>
+<p class="font-body-base text-body-base text-on-surface">$120k</p>
+</div>
+<div>
+<p class="font-label-mono text-label-mono text-outline">LAST CONTACT</p>
+<p class="font-body-base text-body-base text-on-surface">30 days ago</p>
+</div>
+</div>
+</div>
+<div class="md:w-64 flex flex-col border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
+<div class="flex justify-between items-center mb-2">
+<h4 class="font-label-mono text-label-mono text-outline">INVESTOR NOTES</h4>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest/50 rounded p-3 flex-1 overflow-y-auto custom-scrollbar font-body-sm text-body-sm text-on-surface-variant italic text-center flex items-center justify-center">
+                                No notes added yet.
+                            </div>
+<button class="mt-3 w-full py-2 bg-transparent hover:bg-white/5 border border-white/10 border-dashed rounded-lg font-body-sm text-body-sm text-on-surface-variant transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Note
+                            </button>
+</div>
+</div>
+</article>
+</div>
+<!-- Right Column: Alert Feed & Analytics (Takes up 4 columns) -->
+<aside class="xl:col-span-4 flex flex-col gap-6">
+<!-- Quick Stats Bento Box -->
+<div class="glass-panel top-edge-highlight rounded-xl p-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Watchlist Overview</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low rounded-lg p-4 border border-white/5">
+<div class="font-label-mono text-label-mono text-outline mb-1">TRACKING</div>
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary font-bold">12</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 border border-white/5">
+<div class="font-label-mono text-label-mono text-outline mb-1">NEW ALERTS</div>
+<div class="font-display-lg-mobile text-display-lg-mobile text-error font-bold">3</div>
+</div>
+</div>
+</div>
+<!-- Global Alert Feed -->
+<div class="glass-panel top-edge-highlight rounded-xl p-6 flex-1 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Activity</h3>
+<span class="material-symbols-outlined text-outline">history</span>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-4">
+<!-- Activity Item -->
+<div class="flex gap-3 relative pb-4 border-b border-white/5 last:border-0 last:pb-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-white/10 z-10">
+<span class="material-symbols-outlined text-[16px] text-tertiary">trending_up</span>
+</div>
+<!-- Connector line -->
+<div class="absolute left-4 top-8 bottom-0 w-px bg-white/10"></div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface"><strong>NeuroSync</strong> AI Score increased by 5 points.</p>
+<p class="font-label-mono text-label-mono text-outline mt-1">2 HOURS AGO</p>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex gap-3 relative pb-4 border-b border-white/5 last:border-0 last:pb-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-white/10 z-10">
+<span class="material-symbols-outlined text-[16px] text-on-surface">description</span>
+</div>
+<div class="absolute left-4 top-8 bottom-0 w-px bg-white/10 hidden last:block"></div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface"><strong>Apex Logistics</strong> uploaded a new pitch deck.</p>
+<p class="font-label-mono text-label-mono text-outline mt-1">YESTERDAY</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

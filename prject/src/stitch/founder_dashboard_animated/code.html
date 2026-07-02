@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Founder Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-primary": "#0053db",
+                      "secondary": "#d0bcff",
+                      "surface-container-highest": "#2d3449",
+                      "on-primary": "#002a78",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary": "#003915",
+                      "on-surface-variant": "#c3c6d7",
+                      "surface-container-low": "#131b2e",
+                      "surface": "#0b1326",
+                      "surface-container-high": "#222a3d",
+                      "on-background": "#dae2fd",
+                      "surface-variant": "#2d3449",
+                      "outline-variant": "#434655",
+                      "on-secondary-fixed": "#23005c",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "on-primary-fixed": "#00174b",
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "inverse-surface": "#dae2fd",
+                      "on-secondary": "#3c0091",
+                      "tertiary-fixed": "#6bff8f",
+                      "surface-container-lowest": "#060e20",
+                      "surface-bright": "#31394d",
+                      "tertiary-container": "#007e37",
+                      "surface-tint": "#b4c5ff",
+                      "secondary-container": "#571bc1",
+                      "on-tertiary-container": "#c1ffc5",
+                      "on-tertiary-fixed": "#002109",
+                      "surface-dim": "#0b1326",
+                      "tertiary": "#4ae176",
+                      "surface-container": "#171f33",
+                      "on-surface": "#dae2fd",
+                      "inverse-on-surface": "#283044",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "error": "#ffb4ab",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary-container": "#c4abff",
+                      "secondary-fixed": "#e9ddff",
+                      "primary-container": "#2563eb",
+                      "outline": "#8d90a0",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "background": "#0b1326",
+                      "primary": "#b4c5ff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-primary-container": "#eeefff",
+                      "error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "unit": "4px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-base": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "body-base": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              },
+              "keyframes": {
+                  "fade-in-up": {
+                      "0%": { opacity: "0", transform: "translateY(20px)" },
+                      "100%": { opacity: "1", transform: "translateY(0)" }
+                  },
+                  "shimmer": {
+                      "0%": { strokeDashoffset: "200" },
+                      "100%": { strokeDashoffset: "0" }
+                  }
+              },
+              "animation": {
+                  "fade-in-up": "fade-in-up 0.5s ease-out forwards",
+                  "shimmer": "shimmer 2s linear infinite"
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #020617; /* Layer 0 Base */
+            color: #dae2fd;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.15); /* Top edge highlight */
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #571bc1);
+            color: #ffffff;
+            border-radius: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            filter: saturate(1.2);
+            box-shadow: 0 0 15px rgba(87, 27, 193, 0.4);
+        }
+        
+        .glow-hover {
+            transition: all 0.3s ease;
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(180, 197, 255, 0.15);
+            transform: scale(1.02);
+        }
+        
+        .status-pill {
+            background: rgba(74, 225, 118, 0.1);
+            color: #4ae176;
+            border: 1px solid rgba(74, 225, 118, 0.2);
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base antialiased min-h-screen flex overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col p-6 gap-2 bg-surface-container-low/50 backdrop-blur-xl dark:bg-surface-container-low/50 border-r border-outline-variant/10 shadow-xl fixed left-0 top-0 h-screen w-[280px] z-50">
+<!-- Header -->
+<div class="flex items-center gap-4 mb-8">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-variant flex items-center justify-center border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A stylized geometric vector logo representing a rocket taking off from a nest, using neon blue and violet lines on a dark background, conveying a sense of futuristic startup growth and incubation within the LaunchNest brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFZYM714-shzrih99NNkIl0-TogYTFSPOP0vcGi1CimTG5hqKIhwQSmeZJp5RI8he8dmgTth_r_vgc84HsK05qw6g3dMKiPrLbqq5lWeTd-oW3ZMcBVEkBypv_wZqdpWr7uYoWSK_4BSftP1M_FIlC3OahPTSHGBzNbYsGM-wG_nAv56j3OZE4wBl3-gnKspChW3jNiK0SO1H-KSlX9lsnO2oH0tn68vwJX_fohZedP5ODVj3qRFce0bIEPRiP7r8nUiD3W00saOI"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">LaunchNest</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Incubation Portal</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold font-label-mono text-label-mono transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.2)] hover:scale-105" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300 hover:text-primary hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                Portfolio
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300 hover:text-primary hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">group</span>
+                Network
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300 hover:text-primary hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">event_available</span>
+                Sessions
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300 hover:text-primary hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<!-- CTA & Footer Links -->
+<div class="mt-auto flex flex-col gap-4">
+<button class="w-full btn-primary font-body-sm text-body-sm py-3 px-4 flex justify-center items-center gap-2 hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                Apply for Funding
+            </button>
+<div class="border-t border-outline-variant/10 pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                    Help Center
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+                    Logout
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[280px] h-screen overflow-y-auto overflow-x-hidden bg-background relative">
+<!-- Ambient Background Light -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-8 relative z-10">
+<!-- Welcome Header -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 opacity-0 animate-fade-in-up">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Welcome back, Nexus AI</h2>
+<p class="font-body-base text-body-base text-on-surface-variant">Here's your incubation progress for Q3 2024.</p>
+</div>
+<div class="glass-panel px-6 py-4 rounded-xl flex items-center gap-4 glow-hover">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Seed Round</span>
+<span class="font-headline-md text-headline-md text-primary">65% Funded</span>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-surface-variant flex items-center justify-center relative">
+<svg class="absolute inset-0 w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="4"></path>
+<path class="text-primary animate-shimmer" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="65, 100" stroke-width="4"></path>
+</svg>
+<span class="material-symbols-outlined text-primary text-xl">monetization_on</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
+<!-- Quick Stats (4 cols) -->
+<div class="md:col-span-12 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Stat Card 1 -->
+<div class="glass-card p-6 rounded-xl glow-hover transition-all duration-300 opacity-0 animate-fade-in-up delay-100">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="status-pill px-2 py-1 rounded-full font-label-mono text-[10px] uppercase">Active</span>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface-variant mb-1">Active Applications</h3>
+<p class="font-headline-md text-headline-md text-on-surface">3 Pending</p>
+</div>
+<!-- Stat Card 2 -->
+<div class="glass-card p-6 rounded-xl glow-hover transition-all duration-300 opacity-0 animate-fade-in-up delay-200">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">diversity_3</span>
+</div>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface-variant mb-1">Upcoming Mentorship</h3>
+<p class="font-headline-md text-headline-md text-on-surface">2 Sessions</p>
+</div>
+<!-- Stat Card 3 -->
+<div class="glass-card p-6 rounded-xl glow-hover transition-all duration-300 opacity-0 animate-fade-in-up delay-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<span class="status-pill bg-error/10 text-error border-error/20 px-2 py-1 rounded-full font-label-mono text-[10px] uppercase animate-pulse">Action Req</span>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface-variant mb-1">Funding Requests</h3>
+<p class="font-headline-md text-headline-md text-on-surface">1 Review</p>
+</div>
+<!-- Stat Card 4 -->
+<div class="glass-card p-6 rounded-xl glow-hover transition-all duration-300 opacity-0 animate-fade-in-up delay-400">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-outline-variant/20 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">checklist</span>
+</div>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface-variant mb-1">Task List</h3>
+<p class="font-headline-md text-headline-md text-on-surface">5 Remaining</p>
+</div>
+</div>
+<!-- Quick Actions (4 cols) -->
+<div class="md:col-span-12 lg:col-span-4 glass-card p-6 rounded-xl flex flex-col gap-4 opacity-0 animate-fade-in-up delay-300 glow-hover">
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2">Quick Actions</h3>
+<button class="w-full flex items-center gap-3 p-4 rounded-lg bg-surface-container hover:bg-surface-variant/50 border border-outline-variant/10 transition-all duration-300 hover:scale-[1.02] text-left group">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Upload Pitch Deck</span>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant text-[18px] group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full flex items-center gap-3 p-4 rounded-lg bg-surface-container hover:bg-surface-variant/50 border border-outline-variant/10 transition-all duration-300 hover:scale-[1.02] text-left group">
+<div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-secondary transition-colors">Book Mentor Session</span>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant text-[18px] group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full flex items-center gap-3 p-4 rounded-lg bg-surface-container hover:bg-surface-variant/50 border border-outline-variant/10 transition-all duration-300 hover:scale-[1.02] text-left group">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">assignment</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-tertiary transition-colors">Apply for Program</span>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant text-[18px] group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

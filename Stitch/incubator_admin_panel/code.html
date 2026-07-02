@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Admin Control Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#0053db",
+                        "secondary": "#d0bcff",
+                        "surface-container-highest": "#2d3449",
+                        "on-primary": "#002a78",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#003915",
+                        "on-surface-variant": "#c3c6d7",
+                        "surface-container-low": "#131b2e",
+                        "surface": "#0b1326",
+                        "surface-container-high": "#222a3d",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "outline-variant": "#434655",
+                        "on-secondary-fixed": "#23005c",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#00174b",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-surface": "#dae2fd",
+                        "on-secondary": "#3c0091",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-container-lowest": "#060e20",
+                        "surface-bright": "#31394d",
+                        "tertiary-container": "#007e37",
+                        "surface-tint": "#b4c5ff",
+                        "secondary-container": "#571bc1",
+                        "on-tertiary-container": "#c1ffc5",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-dim": "#0b1326",
+                        "tertiary": "#4ae176",
+                        "surface-container": "#171f33",
+                        "on-surface": "#dae2fd",
+                        "inverse-on-surface": "#283044",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#c4abff",
+                        "secondary-fixed": "#e9ddff",
+                        "primary-container": "#2563eb",
+                        "outline": "#8d90a0",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "background": "#0b1326",
+                        "primary": "#b4c5ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-container": "#eeefff",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "unit": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-base": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "display-lg-mobile": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-base": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            font-family: 'Geist', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, theme('colors.primary-container'), theme('colors.secondary-container'));
+            color: theme('colors.on-primary-container');
+            border-radius: theme('borderRadius.lg');
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(87, 27, 193, 0.4);
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: theme('colors.on-surface');
+            border-radius: theme('borderRadius.lg');
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .status-chip-pending { background: rgba(255, 180, 171, 0.1); color: theme('colors.error'); }
+        .status-chip-approved { background: rgba(74, 225, 118, 0.1); color: theme('colors.tertiary'); }
+        .status-chip-review { background: rgba(208, 188, 255, 0.1); color: theme('colors.secondary'); }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col p-6 gap-2 bg-surface-container-low/50 backdrop-blur-xl dark:bg-surface-container-low/50 fixed left-0 top-0 h-screen w-[280px] border-r border-outline-variant/10 shadow-xl z-50">
+<div class="mb-8">
+<h1 class="font-headline-md text-headline-md text-on-surface">LaunchNest</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Incubation Portal</p>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold font-label-mono text-label-mono shadow-sm" href="#" style="transition: cubic-bezier(0.4, 0, 0.2, 1) transition-all">
+<span class="material-symbols-outlined filled-icon" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono hover:bg-primary/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+                Portfolio
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono hover:bg-primary/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Network
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono hover:bg-primary/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+                Sessions
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono hover:bg-primary/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant/20 pt-4">
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Help Center
+            </a>
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-mono text-label-mono transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+<button class="btn-primary w-full py-3 mt-4 font-label-mono text-label-mono font-bold">Apply for Funding</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[280px] p-margin-mobile md:p-gutter max-w-container-max mx-auto w-full">
+<!-- Header -->
+<header class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Admin Control Panel</h2>
+<p class="font-body-base text-body-base text-on-surface-variant mt-1">Platform overview and management.</p>
+</div>
+<div class="flex gap-4">
+<button class="btn-secondary px-4 py-2 font-label-mono text-label-mono flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> Export
+                </button>
+<button class="btn-primary px-4 py-2 font-label-mono text-label-mono flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> New Program/Event
+                </button>
+</div>
+</header>
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Total Users</span>
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">12,450</div>
+<div class="font-label-mono text-label-mono text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +5.2% this month
+                </div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Pending Apps</span>
+<span class="material-symbols-outlined text-secondary">pending_actions</span>
+</div>
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">84</div>
+<div class="font-label-mono text-label-mono text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Action required
+                </div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Active Mentorships</span>
+<span class="material-symbols-outlined text-tertiary">handshake</span>
+</div>
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">312</div>
+<div class="font-label-mono text-label-mono text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +12 new this week
+                </div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Total Funding</span>
+<span class="material-symbols-outlined text-primary-container">attach_money</span>
+</div>
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">$45M</div>
+<div class="font-label-mono text-label-mono text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +$2.1M this quarter
+                </div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<!-- Startup Evaluation Table (Spans 2 columns) -->
+<div class="glass-panel rounded-xl lg:col-span-2 overflow-hidden flex flex-col">
+<div class="p-6 border-b border-outline-variant/20 flex justify-between items-center">
+<h3 class="font-headline-md text-body-base font-semibold text-on-surface">Startup Evaluation</h3>
+<button class="text-primary font-label-mono text-label-mono hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 border-b border-outline-variant/20">
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant font-medium">Startup Name</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant font-medium">Industry</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant font-medium">Date Applied</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant font-medium">Status</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container/20 transition-colors">
+<td class="p-4 font-medium text-on-surface">Nexus Quantum</td>
+<td class="p-4 text-on-surface-variant">Deep Tech</td>
+<td class="p-4 text-on-surface-variant">Oct 24, 2024</td>
+<td class="p-4"><span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider status-chip-pending font-label-mono">Pending</span></td>
+<td class="p-4 text-right">
+<button class="text-primary hover:text-primary-container"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container/20 transition-colors">
+<td class="p-4 font-medium text-on-surface">EcoScale</td>
+<td class="p-4 text-on-surface-variant">Climate Tech</td>
+<td class="p-4 text-on-surface-variant">Oct 22, 2024</td>
+<td class="p-4"><span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider status-chip-review font-label-mono">Under Review</span></td>
+<td class="p-4 text-right">
+<button class="text-primary hover:text-primary-container"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/20 transition-colors">
+<td class="p-4 font-medium text-on-surface">AeroLogistics</td>
+<td class="p-4 text-on-surface-variant">Supply Chain</td>
+<td class="p-4 text-on-surface-variant">Oct 20, 2024</td>
+<td class="p-4"><span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider status-chip-approved font-label-mono">Approved</span></td>
+<td class="p-4 text-right">
+<button class="text-primary hover:text-primary-container"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Global Analytics: Industry Distribution -->
+<div class="glass-panel rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-body-base font-semibold text-on-surface">Industry Distribution</h3>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">pie_chart</span>
+</div>
+<!-- Placeholder for Pie Chart Visualization using stylized CSS -->
+<div class="flex-1 flex items-center justify-center relative min-h-[200px]">
+<div class="w-40 h-40 rounded-full border-[16px] border-surface-container-high relative">
+<!-- Simulated slices via borders/absolute divs - simplified for design -->
+<div class="absolute inset-[-16px] border-[16px] border-transparent border-t-primary border-r-primary rounded-full transform rotate-45 opacity-80"></div>
+<div class="absolute inset-[-16px] border-[16px] border-transparent border-b-secondary rounded-full transform rotate-[-15deg] opacity-80"></div>
+<div class="absolute inset-[-16px] border-[16px] border-transparent border-l-tertiary rounded-full transform rotate-[60deg] opacity-80"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 mt-4">
+<div class="flex justify-between items-center font-label-mono text-label-mono text-body-sm">
+<span class="flex items-center gap-2 text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-primary"></div> FinTech</span>
+<span class="text-on-surface">45%</span>
+</div>
+<div class="flex justify-between items-center font-label-mono text-label-mono text-body-sm">
+<span class="flex items-center gap-2 text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-secondary"></div> AI / ML</span>
+<span class="text-on-surface">35%</span>
+</div>
+<div class="flex justify-between items-center font-label-mono text-label-mono text-body-sm">
+<span class="flex items-center gap-2 text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-tertiary"></div> HealthTech</span>
+<span class="text-on-surface">20%</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

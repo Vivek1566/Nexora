@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Winter Hackathon 2024 - LaunchNest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-container-low": "#131b2e",
+                        "inverse-on-surface": "#283044",
+                        "secondary-container": "#571bc1",
+                        "primary-container": "#2563eb",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#002109",
+                        "on-secondary-container": "#c4abff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-highest": "#2d3449",
+                        "tertiary-fixed": "#6bff8f",
+                        "secondary": "#d0bcff",
+                        "primary": "#b4c5ff",
+                        "on-secondary-fixed": "#23005c",
+                        "outline-variant": "#434655",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-container": "#171f33",
+                        "on-secondary": "#3c0091",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "inverse-surface": "#dae2fd",
+                        "surface-tint": "#b4c5ff",
+                        "surface-bright": "#31394d",
+                        "on-background": "#dae2fd",
+                        "outline": "#8d90a0",
+                        "tertiary-container": "#007e37",
+                        "background": "#0b1326",
+                        "tertiary": "#4ae176",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-dim": "#0b1326",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-lowest": "#060e20",
+                        "surface-container-high": "#222a3d",
+                        "on-surface": "#dae2fd",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#0053db",
+                        "on-primary": "#002a78",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-container": "#c1ffc5",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-tertiary": "#003915"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-base": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-md": ["Geist"],
+                        "display-lg-mobile": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .glass-card-top-glow {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .primary-gradient-btn {
+            background: linear-gradient(135deg, theme('colors.primary-container'), theme('colors.secondary-container'));
+            transition: all 0.3s ease;
+        }
+        .primary-gradient-btn:hover {
+            box-shadow: 0 0 20px rgba(196, 171, 255, 0.4);
+            filter: saturate(1.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10 shadow-md">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">LaunchNest</div>
+<div class="hidden md:flex gap-6">
+<a class="font-body-base text-body-base text-primary border-b-2 border-primary pb-1 active:scale-95 duration-200" href="#">Events</a>
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 active:scale-95 duration-200" href="#">Calendar</a>
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 active:scale-95 duration-200" href="#">My Portal</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">settings</span></button>
+<img alt="Founder Profile" class="w-8 h-8 rounded-full object-cover border border-white/10" data-alt="A small, circular avatar portrait of a young professional tech founder against a dark, futuristic studio background. The lighting is sharp, with subtle blue and violet rim lights highlighting their facial features. The overall tone is authoritative, modern, and perfectly aligned with a high-growth startup ecosystem's polished aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6DGmPg9omH4WgEAVI6qFtYQENifwByIF2PbvBzsXJplSWA7QoMix_y7k4CgQ-MoQm3phIYTdF6sQH8dCLMX88DiX8ObNg-dwfMtSGgsERWkh3oHxhtkl8o7GUtkkd9xfoI_Q5n5qjEdOr5JngspHakxaBAV3l_k2_GCnnP4he6Zj4jCJnuFeuem3emibWENUhynmdjyQy4BLkhL8UBDZYaVwZglksd22QWUnxtlKVvI5DoOMf9jS9Q3mEC3g55yfe_UiYxlHqSFI"/>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 pt-[72px]">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low/50 backdrop-blur-2xl fixed left-0 top-0 h-full w-[280px] hidden lg:flex flex-col border-r border-white/5 shadow-2xl shadow-black/50 z-40 pt-[72px]">
+<div class="flex flex-col gap-unit p-margin-mobile flex-1 overflow-y-auto">
+<div class="mb-6 mt-4">
+<h2 class="font-headline-md text-primary px-3">Orbital Nav</h2>
+<p class="font-label-mono text-label-mono text-on-surface-variant px-3 mt-1">Founder Edition</p>
+</div>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 transition-all cubic-bezier(0.4, 0, 0.2, 1) flex items-center gap-3 rounded-lg" href="#"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+<a class="font-label-mono text-label-mono bg-secondary-container/20 text-secondary border-r-4 border-secondary rounded-l-none rounded-r-full p-3 transition-all cubic-bezier(0.4, 0, 0.2, 1) flex items-center gap-3" href="#"><span class="material-symbols-outlined">terminal</span>Hackathons</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 transition-all cubic-bezier(0.4, 0, 0.2, 1) flex items-center gap-3 rounded-lg" href="#"><span class="material-symbols-outlined">rocket_launch</span>Bootcamps</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 transition-all cubic-bezier(0.4, 0, 0.2, 1) flex items-center gap-3 rounded-lg" href="#"><span class="material-symbols-outlined">groups</span>Networking</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 transition-all cubic-bezier(0.4, 0, 0.2, 1) flex items-center gap-3 rounded-lg" href="#"><span class="material-symbols-outlined">psychology</span>Mentorship</a>
+<button class="mt-8 mb-4 primary-gradient-btn text-white font-body-base text-body-base py-3 px-4 rounded-lg w-full flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span> Create Event
+                </button>
+</div>
+<div class="mt-auto flex flex-col gap-unit p-margin-mobile border-t border-white/5">
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 transition-all cubic-bezier(0.4, 0, 0.2, 1) flex items-center gap-3 rounded-lg" href="#"><span class="material-symbols-outlined">help</span>Support</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 transition-all cubic-bezier(0.4, 0, 0.2, 1) flex items-center gap-3 rounded-lg" href="#"><span class="material-symbols-outlined">logout</span>Logout</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-[280px] p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Hero Section -->
+<div class="glass-panel glass-card-top-glow rounded-xl overflow-hidden mb-gutter relative h-[400px] flex items-end">
+<div class="absolute inset-0 bg-cover bg-center z-0 opacity-40 mix-blend-screen" data-alt="A wide, sweeping digital art landscape depicting a futuristic winter cityscape at twilight. Sleek, neon-lit skyscrapers pierce through soft, swirling snow, emitting an icy blue and deep violet glow. The sky is dark, providing stark contrast to the vivid, glowing architectural highlights. The aesthetic is heavily sci-fi and cyberpunk, perfectly reflecting a high-tech 'Winter Hackathon' environment in a dark mode interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDSSVu_njf-BGfZnhBIG8aFQIm4HY8JwE2uE66Q3i8_FntzhCjJa9tM5zLQZLkNFGozRvKTXzbcZeCgtaLJG_Vcp12S7Ggqa3ZbP9itCSQeRuUp_gfRkSWJ04aVffB3V57iA3o4cwsdCYEkow41wt7XQkDFkwBzSEGzboHUrlZVrxkeSpo-7ZSKkNtYp6n7Q6chjZbrFXK66AcwqQpJBR7jy0Qf7dJPnwDNYlVdBCUpoFoijRMyqkgcRzKnEZu0GfEPz9wTqKKp7f0')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface/80 to-transparent z-10"></div>
+<div class="relative z-20 p-8 w-full flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/30 border border-secondary/30 mb-4">
+<span class="material-symbols-outlined text-[16px] text-secondary">calendar_today</span>
+<span class="font-label-mono text-label-mono text-secondary">Dec 15 - 17, 2024</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Winter Hackathon 2024</h1>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-2xl flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">location_on</span> San Francisco, CA (Hybrid)
+                        </p>
+</div>
+</div>
+</div>
+<!-- Content Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Info Column -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Overview Bento -->
+<section class="glass-panel glass-card-top-glow rounded-xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+<span class="material-symbols-outlined text-primary text-[28px]">description</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">The Challenge</h2>
+</div>
+<p class="font-body-base text-body-base text-on-surface-variant mb-4">
+                            Join us for 48 hours of intense building, collaborating, and shipping. The Winter Hackathon 2024 focuses on building next-generation developer tools utilizing AI and advanced data pipelines. We are looking for solutions that reduce friction in the CI/CD process and enhance developer productivity in decentralized environments.
+                        </p>
+<p class="font-body-base text-body-base text-on-surface-variant">
+                            Bring your best ideas, form a stellar team, and prepare to present a working prototype to our panel of top-tier venture capitalists and engineering leaders.
+                        </p>
+</section>
+<!-- Schedule Bento -->
+<section class="glass-panel glass-card-top-glow rounded-xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+<span class="material-symbols-outlined text-primary text-[28px]">schedule</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Event Schedule</h2>
+</div>
+<div class="relative pl-6 border-l-2 border-surface-variant space-y-8">
+<div class="relative">
+<div class="absolute -left-[35px] top-1 w-4 h-4 rounded-full bg-surface border-2 border-primary"></div>
+<h3 class="font-body-base text-body-base font-bold text-on-surface">Day 1: Ideation &amp; Teaming</h3>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1 mb-2">Dec 15, 6:00 PM PST</p>
+<p class="font-body-sm text-body-sm text-outline">Kickoff keynote, pitch your ideas, find teammates, and start architecting your solution.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[35px] top-1 w-4 h-4 rounded-full bg-surface border-2 border-tertiary"></div>
+<h3 class="font-body-base text-body-base font-bold text-on-surface">Day 2: Deep Build</h3>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1 mb-2">Dec 16, All Day</p>
+<p class="font-body-sm text-body-sm text-outline">Uninterrupted coding time. Mentor office hours available throughout the day. Midnight pizza drop.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[35px] top-1 w-4 h-4 rounded-full bg-surface border-2 border-secondary"></div>
+<h3 class="font-body-base text-body-base font-bold text-on-surface">Day 3: Demo &amp; Judging</h3>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1 mb-2">Dec 17, 3:00 PM PST</p>
+<p class="font-body-sm text-body-sm text-outline">Code freeze, finalize presentations, and demo live on stage. Closing ceremony and awards follow.</p>
+</div>
+</div>
+</section>
+<!-- Mentors Row -->
+<section class="glass-panel glass-card-top-glow rounded-xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+<span class="material-symbols-outlined text-primary text-[28px]">group</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Mentors &amp; Judges</h2>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-2 hide-scrollbar">
+<div class="flex flex-col items-center min-w-[100px]">
+<img alt="Mentor 1" class="w-20 h-20 rounded-full object-cover border-2 border-surface-variant mb-3" data-alt="A tightly cropped headshot of a seasoned tech executive in their late 40s. They are wearing a dark, tailored blazer over a minimalist black t-shirt. The background is a dark, out-of-focus server room, hinting at deep technical expertise. Lighting is dramatic, with cool blue ambient light and a sharp white key light, perfectly suiting a futuristic professional dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjHKmw6UY2usjvKrS_5Kb-Ke3Pd1XLv_clIxwwBAL7WXisu36hUOlR6hBsxi5I4tk-W2wC41KS8cgbZcGkK2rsIFsE89WAQaaeTJn_ZJ7V_AvZgEOl-0bW3osoFl3dA5pmi9OWDWMv8h6Ruuw6NCVGXbeviBxM6XTuYY_n1Et9zFH-UwsCHqvCbfcHvxLtIrFKXislJBxPc_EtKWfQP-sUxKVpxI2_BoDDtKVfMVoZVGHF4eH6xQCyx5lUoUCkco2H7qCNqN2rsac"/>
+<span class="font-body-sm text-body-sm text-on-surface text-center font-bold">Alex Chen</span>
+<span class="font-label-mono text-label-mono text-outline text-center">CTO, Nexus</span>
+</div>
+<div class="flex flex-col items-center min-w-[100px]">
+<img alt="Mentor 2" class="w-20 h-20 rounded-full object-cover border-2 border-surface-variant mb-3" data-alt="A portrait of a sharp, analytical venture capitalist in her 30s. She has a focused expression, wearing sleek, modern silver glasses. The background is a subtle, dark geometric pattern illuminated by soft purple neon hues. The image conveys authority, financial acumen, and startup savvy, aligning with a premium dark-mode tech ecosystem." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpFQP04V7adS_iBN10EVLe-_DT5iCgyCllTXpIbow2F1OSCWvM6Xj0xTga6rdPvGTcuGZy91jDmNZNS3DXyVBprUbK62WkzSfh9YRWGilH8O922gZevb8Vx0tK5jCZctoS7ZyXSDtslmid_it2quQQ1HPK44GA7zeQSoiUooqRpfO3Yvu-pIMr7xhDhUcudRSrsWyipvtTmpjfCz8KMk-x2Vp1OOBc4X2kZDZBMcnJLQQGCY8H_-LR-qQ1j3I43zBmIvx6kKi4Jxk"/>
+<span class="font-body-sm text-body-sm text-on-surface text-center font-bold">Sarah Jenkins</span>
+<span class="font-label-mono text-label-mono text-outline text-center">Partner, V-Cap</span>
+</div>
+<div class="flex flex-col items-center min-w-[100px]">
+<img alt="Mentor 3" class="w-20 h-20 rounded-full object-cover border-2 border-surface-variant mb-3" data-alt="A headshot of a charismatic senior software engineer in a casual, high-quality dark grey hoodie. They are situated in a modern, dimly lit tech office space with hints of glowing green monitors in the deep background. The lighting highlights their face with a warm, welcoming glow against the cool, dark background, representing approachable technical mentorship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASi4pdUqWcZurVOe3M_upbjc17oA-zcKTNJaENiQ3T0utJwOLEKL5CW4nDQDCk5MHl6qNNH-Q8XdGrCyetfFy0Ab-96hWUmx-GFslx2xriCjiyA0JktRxb1obepRocX8B-Lt5YzVQkQuAK4QSXJJ3OuPn6KJ1u-AIT1FTDRl8wTFI2gTng-pULNhY94VcSqc4pxXP0N6ZN8o4IcEh2HMZCIRdFRYYv7B5P7xtEWmOSUXH9eaSOjSqXBt8ntQd_dAYXtye3qGAyBTk"/>
+<span class="font-body-sm text-body-sm text-on-surface text-center font-bold">David Roy</span>
+<span class="font-label-mono text-label-mono text-outline text-center">Lead Eng, DataCorp</span>
+</div>
+<div class="flex flex-col items-center min-w-[100px]">
+<div class="w-20 h-20 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center mb-3 bg-surface-container/50">
+<span class="font-body-sm text-body-sm text-outline">+3 More</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Registration Sidebar -->
+<aside class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="glass-panel glass-card-top-glow rounded-xl p-6 sticky top-[96px]">
+<div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+<span class="material-symbols-outlined text-secondary text-[28px]">app_registration</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Registration</h2>
+</div>
+<form class="space-y-5 flex flex-col">
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-2">Team Name</label>
+<input class="w-full bg-surface-container-highest border border-white/10 rounded-lg p-3 text-on-surface font-body-base text-body-base focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors placeholder:text-outline" placeholder="e.g. The Innovators" type="text"/>
+</div>
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-2">Number of Participants</label>
+<select class="w-full bg-surface-container-highest border border-white/10 rounded-lg p-3 text-on-surface font-body-base text-body-base focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors">
+<option value="1">Solo (Looking for team)</option>
+<option value="2">2 Members</option>
+<option value="3">3 Members</option>
+<option value="4">4 Members (Max)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-2">Problem Statement Area</label>
+<textarea class="w-full bg-surface-container-highest border border-white/10 rounded-lg p-3 text-on-surface font-body-base text-body-base focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors placeholder:text-outline resize-none" placeholder="Briefly describe what you plan to build..." rows="3"></textarea>
+</div>
+<button class="w-full primary-gradient-btn text-white font-body-base text-body-base font-bold py-4 rounded-lg mt-4 shadow-lg shadow-primary-container/20 flex items-center justify-center gap-2" type="button">
+                                Submit Registration <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+</div>
+<!-- Prizes Bento -->
+<div class="glass-panel glass-card-top-glow rounded-xl p-6">
+<div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+<span class="material-symbols-outlined text-tertiary text-[28px]">trophy</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Prizes</h2>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-surface-container/50 p-4 rounded-lg border border-white/5">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-500/20">
+<span class="font-body-sm text-body-sm font-bold text-black">1st</span>
+</div>
+<div>
+<h4 class="font-body-base text-body-base font-bold text-on-surface">$10,000</h4>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Incubator Interview</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container/50 p-4 rounded-lg border border-white/5">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex items-center justify-center shadow-lg shadow-gray-400/20">
+<span class="font-body-sm text-body-sm font-bold text-black">2nd</span>
+</div>
+<div>
+<h4 class="font-body-base text-body-base font-bold text-on-surface">$5,000</h4>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Cloud Credits</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container/50 p-4 rounded-lg border border-white/5">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-800 flex items-center justify-center shadow-lg shadow-orange-500/20">
+<span class="font-body-sm text-body-sm font-bold text-black">3rd</span>
+</div>
+<div>
+<h4 class="font-body-base text-body-base font-bold text-on-surface">$2,500</h4>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Swag Pack</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full py-8 mt-auto border-t border-outline-variant/20 relative z-50">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto">
+<span class="font-body-sm text-body-sm text-on-surface-variant">© 2024 LaunchNest Orbital System. All rights reserved.</span>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+<div class="font-bold text-on-surface mt-4 md:mt-0">LaunchNest</div>
+</div>
+</footer>
+<style>
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

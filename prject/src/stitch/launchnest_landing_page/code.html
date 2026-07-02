@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - The Ultimate Incubation Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-primary": "#0053db",
+                        "secondary": "#d0bcff",
+                        "surface-container-highest": "#2d3449",
+                        "on-primary": "#002a78",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#003915",
+                        "on-surface-variant": "#c3c6d7",
+                        "surface-container-low": "#131b2e",
+                        "surface": "#0b1326",
+                        "surface-container-high": "#222a3d",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "outline-variant": "#434655",
+                        "on-secondary-fixed": "#23005c",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#00174b",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-surface": "#dae2fd",
+                        "on-secondary": "#3c0091",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-container-lowest": "#060e20",
+                        "surface-bright": "#31394d",
+                        "tertiary-container": "#007e37",
+                        "surface-tint": "#b4c5ff",
+                        "secondary-container": "#571bc1",
+                        "on-tertiary-container": "#c1ffc5",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-dim": "#0b1326",
+                        "tertiary": "#4ae176",
+                        "surface-container": "#171f33",
+                        "on-surface": "#dae2fd",
+                        "inverse-on-surface": "#283044",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#c4abff",
+                        "secondary-fixed": "#e9ddff",
+                        "primary-container": "#2563eb",
+                        "outline": "#8d90a0",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "background": "#0b1326",
+                        "primary": "#b4c5ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-container": "#eeefff",
+                        "error-container": "#93000a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "unit": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "body-base": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "display-lg-mobile": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-md": ["Geist"]
+                    },
+                    fontSize: {
+                        "body-base": ["16px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.04em", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }],
+                        "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-mono": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-card-hover:hover {
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+            filter: saturate(1.2);
+        }
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.02) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Ambient Background */
+        .ambient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .blob-1 {
+            background: #2563eb;
+            width: 600px;
+            height: 600px;
+            top: -100px;
+            left: -100px;
+        }
+        .blob-2 {
+            background: #8b5cf6;
+            width: 500px;
+            height: 500px;
+            bottom: 20%;
+            right: -50px;
+            animation-delay: -5s;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+    </style>
+</head>
+<body class="font-body-base text-body-base antialiased overflow-x-hidden relative">
+<div class="ambient-bg">
+<div class="ambient-blob blob-1"></div>
+<div class="ambient-blob blob-2"></div>
+</div>
+<!-- TopNavBar -->
+<nav class="bg-surface/80 backdrop-blur-md dark:bg-surface/80 docked full-width top-0 sticky z-50 border-b border-outline-variant/10 shadow-sm flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="font-display-lg text-display-lg-mobile tracking-tighter text-primary dark:text-primary">
+            LaunchNest
+        </div>
+<ul class="hidden md:flex gap-8 items-center">
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-headline-md text-headline-md" href="#">Startups</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-headline-md text-headline-md" href="#">Mentors</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-headline-md text-headline-md" href="#">Investors</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-headline-md text-headline-md" href="#">About</a></li>
+</ul>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 hidden sm:block">Log In</button>
+<button class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md">Get Started</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30 ml-2 hidden lg:block">
+<img class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a professional individual in a futuristic, sleek office setting. The lighting is soft and cinematic, highlighting their features against a dark, tech-inspired background with subtle blue and violet accents. The overall mood is confident and authoritative, perfectly aligning with the high-end, futuristic brand identity of the incubation portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqynZP1Yeu62oHs3vzas8Y4UtWCXpSa2LHYEUI6lxM4duDiEeBqloUoZoKBj4J72_Oy7LkF8LYpJon-F7BerQIA3F-y-RQYtk2NMthixrbxJEW1MHjlWNY9Kp-KfBVmuIwN60UrLuEEkNW2zJvW0AxVdUebk--tpgWSxH0JKF_XZESAjxTIBL1Tka2ErccWEzGq7MFeSO-dZ7DiMT-GAHSKelR-cCqtLwM6Q8h73BnvYkimZr7UoPf8SQrdndB1W1pIgH9sSGXqIA"/>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 lg:py-24">
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex flex-col justify-center items-center text-center reveal">
+<h1 class="font-display-lg text-[48px] md:text-[72px] leading-tight tracking-tighter text-on-surface mb-6 max-w-4xl">
+                Accelerate Your Vision in the <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2563eb] to-[#8b5cf6]">LaunchNest</span>
+</h1>
+<p class="font-body-base text-[18px] md:text-[22px] text-on-surface-variant max-w-2xl mb-10">
+                The ultimate incubation portal connecting visionary founders with elite mentors and high-impact capital.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="btn-primary px-8 py-4 rounded-xl text-white font-bold text-[16px] flex items-center justify-center gap-2">
+                    Launch Your Startup
+                    <span class="material-symbols-outlined">rocket_launch</span>
+</button>
+<button class="btn-secondary px-8 py-4 rounded-xl text-on-surface font-bold text-[16px] flex items-center justify-center gap-2">
+                    Join as Mentor/Investor
+                    <span class="material-symbols-outlined">handshake</span>
+</button>
+</div>
+<!-- Floating Decorative Elements -->
+<div class="absolute top-[20%] left-[10%] glass-panel p-4 rounded-xl hidden lg:flex items-center gap-3 animate-[float_6s_ease-in-out_infinite]">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div class="text-left">
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Funded Today</div>
+<div class="font-bold text-on-surface">$2.4M</div>
+</div>
+</div>
+<div class="absolute bottom-[30%] right-[10%] glass-panel p-4 rounded-xl hidden lg:flex items-center gap-3 animate-[float_8s_ease-in-out_infinite_reverse]">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined">group_add</span>
+</div>
+<div class="text-left">
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">New Mentors</div>
+<div class="font-bold text-on-surface">+14 This Week</div>
+</div>
+</div>
+</section>
+<!-- Statistics -->
+<section class="py-16 border-y border-outline-variant/10 reveal">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<div>
+<div class="font-display-lg text-[40px] text-primary mb-2">1200+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest">Startups</div>
+</div>
+<div>
+<div class="font-display-lg text-[40px] text-secondary mb-2">320+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest">Mentors</div>
+</div>
+<div>
+<div class="font-display-lg text-[40px] text-tertiary mb-2">180+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest">Investors</div>
+</div>
+<div>
+<div class="font-display-lg text-[40px] text-on-surface mb-2">42+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest">Programs</div>
+</div>
+</div>
+</section>
+<!-- How it Works -->
+<section class="py-24 reveal">
+<div class="text-center mb-16">
+<h2 class="font-display-lg text-[36px] text-on-surface mb-4">The Incubation Journey</h2>
+<p class="font-body-base text-on-surface-variant max-w-2xl mx-auto">A seamless pathway from concept to massive scale, engineered for high-velocity execution.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="glass-panel p-8 rounded-2xl glass-card-hover transition-all duration-300 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-[32px]">lightbulb</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">1. Ideate &amp; Apply</h3>
+<p class="font-body-base text-on-surface-variant">Submit your vision. Our AI-driven vetting process identifies high-potential concepts instantly.</p>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel p-8 rounded-2xl glass-card-hover transition-all duration-300 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#8b5cf6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[32px]">precision_manufacturing</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">2. Build &amp; Connect</h3>
+<p class="font-body-base text-on-surface-variant">Gain access to our elite network of mentors and proprietary high-velocity building tools.</p>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel p-8 rounded-2xl glass-card-hover transition-all duration-300 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4ae176] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-14 h-14 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined text-[32px]">flight_takeoff</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">3. Fund &amp; Scale</h3>
+<p class="font-body-base text-on-surface-variant">Pitch directly to pre-vetted investors and secure the capital needed to dominate your market.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 mt-24">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 max-w-container-max mx-auto gap-6 md:gap-0">
+<div class="flex flex-col gap-2 text-center md:text-left">
+<div class="font-headline-md text-headline-md text-primary">LaunchNest</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">© 2024 LaunchNest Startup Incubation. All rights reserved.</div>
+</div>
+<ul class="flex flex-wrap justify-center gap-6 font-label-mono text-label-mono">
+<li><a class="text-on-surface-variant hover:text-tertiary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-tertiary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-on-surface-variant hover:text-tertiary transition-colors" href="#">Cookie Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-tertiary transition-colors" href="#">Contact Support</a></li>
+</ul>
+</div>
+</footer>
+<script>
+        // Simple scroll reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+</body></html>

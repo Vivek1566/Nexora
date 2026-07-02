@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Startup Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed": "#6bff8f",
+                      "inverse-primary": "#0053db",
+                      "surface": "#0b1326",
+                      "on-secondary": "#3c0091",
+                      "surface-container-lowest": "#060e20",
+                      "secondary-fixed": "#e9ddff",
+                      "on-tertiary-container": "#c1ffc5",
+                      "inverse-surface": "#dae2fd",
+                      "on-surface": "#dae2fd",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#003915",
+                      "secondary-container": "#571bc1",
+                      "surface-dim": "#0b1326",
+                      "primary-container": "#2563eb",
+                      "tertiary-container": "#007e37",
+                      "outline": "#8d90a0",
+                      "tertiary": "#4ae176",
+                      "on-primary": "#002a78",
+                      "outline-variant": "#434655",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "surface-container-low": "#131b2e",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#002109",
+                      "on-surface-variant": "#c3c6d7",
+                      "on-primary-fixed": "#00174b",
+                      "surface-container-high": "#222a3d",
+                      "surface-variant": "#2d3449",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "inverse-on-surface": "#283044",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "primary": "#b4c5ff",
+                      "on-background": "#dae2fd",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "on-error": "#690005",
+                      "surface-container": "#171f33",
+                      "surface-bright": "#31394d",
+                      "on-primary-container": "#eeefff",
+                      "surface-container-highest": "#2d3449",
+                      "surface-tint": "#b4c5ff",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary-fixed": "#23005c",
+                      "on-secondary-container": "#c4abff",
+                      "secondary": "#d0bcff",
+                      "background": "#0b1326"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "margin-mobile": "16px",
+                      "container-max": "1440px",
+                      "margin-desktop": "40px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "body-base": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-base": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          .glass-panel {
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(16px);
+          }
+          .glass-card {
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.05);
+              border-top: 1px solid rgba(255, 255, 255, 0.15);
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .glass-card:hover {
+              background: rgba(255, 255, 255, 0.04);
+              transform: translateY(-4px);
+              box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(180, 197, 255, 0.1);
+          }
+          .glow-btn-primary {
+              background: linear-gradient(135deg, #2563eb, #571bc1);
+              transition: all 0.3s ease;
+          }
+          .glow-btn-primary:hover {
+              box-shadow: 0 0 20px rgba(87, 27, 193, 0.4);
+              filter: saturate(1.2);
+          }
+          /* Custom scrollbar for sidebar */
+          ::-webkit-scrollbar {
+              width: 6px;
+          }
+          ::-webkit-scrollbar-track {
+              background: transparent;
+          }
+          ::-webkit-scrollbar-thumb {
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 10px;
+          }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-white/10 shadow-lg shadow-surface-container-lowest/50 flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto h-[80px]">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-display-lg font-bold text-primary tracking-tighter">LaunchNest</span>
+<div class="flex gap-6 items-center ml-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 active:scale-95 transition-transform font-body-base text-body-base" href="#">Portfolio</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 active:scale-95 transition-transform font-body-base text-body-base" href="#">Discovery</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 active:scale-95 transition-transform font-body-base text-body-base" href="#">Watchlist</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 active:scale-95 transition-transform font-body-base text-body-base" href="#">Messages</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant absolute left-3 top-1/2 transform -translate-y-1/2" style="font-size: 20px;">search</span>
+<input class="bg-surface-container-high border-none rounded-full pl-10 pr-4 py-2 text-on-surface text-body-sm font-body-sm focus:ring-1 focus:ring-primary focus:outline-none w-64" placeholder="Search startups..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<button class="glow-btn-primary text-on-primary-container px-6 py-2 rounded-lg font-body-sm text-body-sm font-medium">Invest Now</button>
+<img alt="Investor Profile" class="w-10 h-10 rounded-full object-cover border border-white/20" data-alt="A small, circular avatar portrait of a professional investor in a dark, neon-lit studio setting. Cinematic lighting, sharp focus, futuristic corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_kTV-PATjxb04sgXCmN7MTJToCMgtBzd2G-31U5ilxm3-A8eH9-928s5NQPvRcxkzcEi3YGykbuPSIieBr2hw8VLBiQ4J4tkEqvsg_2CZY6yKzxMStPVliBTHf5uuTvJSU2pYsQeAhf8Nu6gxllv1feSibQGESCfMrHxp9ocGErwYpWW85yu3Ky03M_vjMgdvp5SNkPx6r7owb6t0cDsNmCkhxXKqKtV5jZGMewQQ1pouyZ1P8ZaIFkCV_qsIHzSbkySWZz8CcgE"/>
+</div>
+</nav>
+<!-- SideNavBar (Mobile/Tablet replacement for Desktop TopNav if needed, but per prompt, side filter is needed, Nav Shell is Top on Web) -->
+<!-- We'll build a custom filter sidebar for the Discovery page -->
+<div class="flex flex-1 mt-0 md:mt-[80px] w-full max-w-container-max mx-auto">
+<!-- Filter Sidebar -->
+<aside class="hidden lg:block w-[320px] fixed h-[calc(100vh-80px)] overflow-y-auto glass-panel border-l-0 border-t-0 border-b-0 border-r border-white/10 p-6 z-40">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-headline-md font-headline-md text-on-surface">Filters</h2>
+<button class="text-on-surface-variant hover:text-primary text-body-sm font-body-sm">Reset</button>
+</div>
+<!-- AI Readiness Score -->
+<div class="mb-8">
+<h3 class="text-body-base font-body-base text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">psychology</span>
+                    Min AI Readiness
+                </h3>
+<input class="w-full accent-primary h-1 bg-surface-container-high rounded-full appearance-none outline-none" max="100" min="1" type="range" value="75"/>
+<div class="flex justify-between text-label-mono font-label-mono text-on-surface-variant mt-2">
+<span>1</span>
+<span class="text-primary font-bold">75+</span>
+<span>100</span>
+</div>
+</div>
+<!-- Funding Stage -->
+<div class="mb-8">
+<h3 class="text-body-base font-body-base text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">monetization_on</span>
+                    Funding Stage
+                </h3>
+<div class="flex flex-col gap-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="form-checkbox rounded bg-surface-container-high border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="text-body-sm font-body-sm text-on-surface group-hover:text-primary transition-colors">Pre-Seed</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="form-checkbox rounded bg-surface-container-high border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="text-body-sm font-body-sm text-on-surface group-hover:text-primary transition-colors">Seed</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox rounded bg-surface-container-high border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="text-body-sm font-body-sm text-on-surface group-hover:text-primary transition-colors">Series A</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox rounded bg-surface-container-high border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="text-body-sm font-body-sm text-on-surface group-hover:text-primary transition-colors">Series B+</span>
+</label>
+</div>
+</div>
+<!-- Industry -->
+<div class="mb-8">
+<h3 class="text-body-base font-body-base text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">category</span>
+                    Industry
+                </h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 rounded-full bg-primary/20 border border-primary/50 text-primary text-label-mono font-label-mono hover:bg-primary/30 transition-colors">FinTech</button>
+<button class="px-3 py-1 rounded-full bg-surface-container-high border border-white/10 text-on-surface-variant text-label-mono font-label-mono hover:bg-white/10 transition-colors">HealthTech</button>
+<button class="px-3 py-1 rounded-full bg-primary/20 border border-primary/50 text-primary text-label-mono font-label-mono hover:bg-primary/30 transition-colors">SaaS</button>
+<button class="px-3 py-1 rounded-full bg-surface-container-high border border-white/10 text-on-surface-variant text-label-mono font-label-mono hover:bg-white/10 transition-colors">ClimateTech</button>
+<button class="px-3 py-1 rounded-full bg-surface-container-high border border-white/10 text-on-surface-variant text-label-mono font-label-mono hover:bg-white/10 transition-colors">Web3</button>
+</div>
+</div>
+<!-- Geography -->
+<div class="mb-8">
+<h3 class="text-body-base font-body-base text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">public</span>
+                    Geography
+                </h3>
+<select class="w-full bg-surface-container-high border border-white/10 rounded-lg p-3 text-body-sm font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>Global (All Regions)</option>
+<option>North America</option>
+<option>Europe</option>
+<option>Asia Pacific</option>
+</select>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-[320px] p-6 md:p-10">
+<header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+<div>
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-on-surface mb-2">Discovery</h1>
+<p class="text-body-base font-body-base text-on-surface-variant max-w-2xl">Explore high-velocity startups vetted by LaunchNest. Evaluated for AI readiness and market traction.</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Sort by:</span>
+<select class="bg-surface-container-high border border-white/10 rounded-lg p-2 text-body-sm font-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>AI Readiness (High to Low)</option>
+<option>Newest Added</option>
+<option>Funding Goal</option>
+</select>
+</div>
+</header>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="glass-card rounded-xl p-6 relative group overflow-hidden flex flex-col h-full">
+<div class="absolute top-4 right-4 z-10">
+<button class="w-10 h-10 rounded-full bg-surface-container/50 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all backdrop-blur-sm group-hover:scale-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; color: #b4c5ff;">bookmark</span>
+</button>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container-high border border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A sleek, minimalist startup logo for a fintech company featuring a glowing abstract geometric nexus symbol in neon violet and blue against a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4bYUFotM7G-moGaI_av2ExAKVXOI1X2V644XgG7grpyMLEUM8Tl5NhkaWZuUr17Ui8TYU9gsIVHC36rmf_BWhB42TOPFkv9_SjD0otljDbe18hUHWG_c6smCw4FNS31PFISKGSwFU6X3GvAW4KdHIgxiGWgUtZL-bcSEslpLRHyOHOo-cKwgDepSMRPvd_sc9oG66l5VHB6pecyYzQZ9WnqWjVtkTeGeN3i0a5VJ_rMFvpt2bVcPyvmphV7ztSEcFyQq3blBTqOw"/>
+</div>
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface leading-tight">Nexus Pay</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded text-label-mono font-label-mono bg-primary/10 text-primary border border-primary/20">FinTech</span>
+<span class="px-2 py-0.5 rounded text-label-mono font-label-mono bg-surface-container-high text-on-surface-variant border border-white/5">Seed</span>
+</div>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6 flex-grow">
+                        Decentralized autonomous payroll system for remote-first global teams, utilizing predictive AI for currency fluctuation mitigation.
+                    </p>
+<div class="mt-auto border-t border-white/5 pt-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-mono font-label-mono text-on-surface-variant">AI Readiness Score</span>
+<span class="text-label-mono font-label-mono text-tertiary font-bold">94 / 100</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full shadow-[0_0_10px_rgba(74,225,118,0.5)]" style="width: 94%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-xl p-6 relative group overflow-hidden flex flex-col h-full">
+<div class="absolute top-4 right-4 z-10">
+<button class="w-10 h-10 rounded-full bg-surface-container/50 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all backdrop-blur-sm group-hover:scale-110">
+<span class="material-symbols-outlined text-on-surface-variant">bookmark_add</span>
+</button>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container-high border border-white/10 overflow-hidden shrink-0 flex items-center justify-center p-2">
+<img class="w-full h-full object-contain" data-alt="A modern, abstract logo for a biotech startup featuring a stylized DNA helix merging with a green leaf motif, glowing softly on a dark gradient background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiPz6vjGktVHB_9ewlDUEUlcGPN9H0M6R9z9QGTtNaQaINTKiNRqr_AtuIG4Lz-IiNSqxohkzfJMgh6PNIK62cm0_JfH5Dvdf5fpFc7wlG4GsDq_vxCYDdXCEvsdr2vYN00TFffZXVbZNaMQJi81z4b9YsedOw9ec6aGnh6cZX4SXeycQKmQy9mrW-y7W5_djQfrwehsy_J0KOdUWxoNcVo0m3mJyibF5uJ09sYV2yhddSMmCWUhU5pEXvYZuxD9NyP3aBEFPXdDY"/>
+</div>
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface leading-tight">GenoSynth</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded text-label-mono font-label-mono bg-primary/10 text-primary border border-primary/20">HealthTech</span>
+<span class="px-2 py-0.5 rounded text-label-mono font-label-mono bg-surface-container-high text-on-surface-variant border border-white/5">Series A</span>
+</div>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6 flex-grow">
+                        Generative AI models for accelerating synthetic biology research and custom protein folding simulations for pharma R&amp;D.
+                    </p>
+<div class="mt-auto border-t border-white/5 pt-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-mono font-label-mono text-on-surface-variant">AI Readiness Score</span>
+<span class="text-label-mono font-label-mono text-tertiary font-bold">88 / 100</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full shadow-[0_0_10px_rgba(74,225,118,0.5)]" style="width: 88%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-xl p-6 relative group overflow-hidden flex flex-col h-full">
+<div class="absolute top-4 right-4 z-10">
+<button class="w-10 h-10 rounded-full bg-surface-container/50 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all backdrop-blur-sm group-hover:scale-110">
+<span class="material-symbols-outlined text-on-surface-variant">bookmark_add</span>
+</button>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container-high border border-white/10 overflow-hidden shrink-0 flex items-center justify-center bg-gradient-to-br from-secondary-container to-surface-container-lowest">
+<span class="text-headline-md font-headline-md text-white font-bold">O2</span>
+</div>
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface leading-tight">AeroCarbon</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded text-label-mono font-label-mono bg-primary/10 text-primary border border-primary/20">ClimateTech</span>
+<span class="px-2 py-0.5 rounded text-label-mono font-label-mono bg-surface-container-high text-on-surface-variant border border-white/5">Pre-Seed</span>
+</div>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6 flex-grow">
+                        Direct air capture hardware optimized by machine learning algorithms to reduce energy consumption by 40% per ton of CO2.
+                    </p>
+<div class="mt-auto border-t border-white/5 pt-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-mono font-label-mono text-on-surface-variant">AI Readiness Score</span>
+<span class="text-label-mono font-label-mono text-primary font-bold">72 / 100</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[0_0_10px_rgba(180,197,255,0.5)]" style="width: 72%;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-center">
+<button class="bg-surface-container border border-white/10 text-on-surface px-6 py-3 rounded-lg font-body-sm text-body-sm hover:bg-surface-bright transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">refresh</span> Load More Opportunities
+                </button>
+</div>
+</main>
+</div>
+</body></html>

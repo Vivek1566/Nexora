@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Event Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-container-low": "#131b2e",
+                        "inverse-on-surface": "#283044",
+                        "secondary-container": "#571bc1",
+                        "primary-container": "#2563eb",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#002109",
+                        "on-secondary-container": "#c4abff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-highest": "#2d3449",
+                        "tertiary-fixed": "#6bff8f",
+                        "secondary": "#d0bcff",
+                        "primary": "#b4c5ff",
+                        "on-secondary-fixed": "#23005c",
+                        "outline-variant": "#434655",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-container": "#171f33",
+                        "on-secondary": "#3c0091",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "inverse-surface": "#dae2fd",
+                        "surface-tint": "#b4c5ff",
+                        "surface-bright": "#31394d",
+                        "on-background": "#dae2fd",
+                        "outline": "#8d90a0",
+                        "tertiary-container": "#007e37",
+                        "background": "#0b1326",
+                        "tertiary": "#4ae176",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-dim": "#0b1326",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-lowest": "#060e20",
+                        "surface-container-high": "#222a3d",
+                        "on-surface": "#dae2fd",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#0053db",
+                        "on-primary": "#002a78",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-container": "#c1ffc5",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-tertiary": "#003915"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-base": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-md": ["Geist"],
+                        "display-lg-mobile": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #020617; /* Fallback */
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glass-card-top-light {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Smooth transitions */
+        .smooth-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Custom scrollbar for sidebar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-base text-body-base bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-md">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<div class="text-headline-md font-headline-md font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    LaunchNest
+                </div>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-md active:scale-95 duration-200" href="#">Events</a>
+<a class="text-primary border-b-2 border-primary pb-1 px-3 py-2 hover:bg-white/5 transition-all duration-300 active:scale-95 duration-200" href="#">Calendar</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-md active:scale-95 duration-200" href="#">My Portal</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+<img alt="Founder Profile" class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a professional startup founder. The lighting is dramatic and cinematic, reminiscent of high-end corporate photography, set against a dark, futuristic background with subtle blue and purple neon reflections. The founder exudes confidence and authority, perfectly aligning with a premium venture capital aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ik-ePgRPPxOczRNzI7eA4eZwnmy4pmdvvEErWTgWcHBqUFSO1_zLwGE0pM7LDAzLahHlPJgkz6-yCu43HsLNyofpeSX6tXLPW-E_Um9nE7zdws3bh_p4rOusDRFOFSMHPEfxOgWV_uv3XKQHroFVViEg18ON1q7RFzOxekFtID1WPSUY5IBloGY7p2okwHu8I_yIH2OrKGqK2ToDbDo9wL1c0NOpwL88OtDu9nKBRqP16DenvMuMbqB9gSjg4u87GzKza62wST4"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="fixed left-0 top-0 h-full w-[280px] hidden lg:flex flex-col bg-surface-container-low/50 backdrop-blur-2xl border-r border-white/5 shadow-2xl shadow-black/50 z-40 pt-[80px]">
+<div class="flex flex-col gap-unit p-margin-mobile h-full">
+<div class="mb-8 px-3">
+<div class="font-headline-md text-primary mb-1">Orbital Nav</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase">Founder Edition</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-mono text-label-mono">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">terminal</span>
+<span class="font-label-mono text-label-mono">Hackathons</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">rocket_launch</span>
+<span class="font-label-mono text-label-mono">Bootcamps</span>
+</a>
+<a class="flex items-center gap-3 bg-secondary-container/20 text-secondary border-r-4 border-secondary rounded-l-none rounded-r-full p-3 transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-mono text-label-mono">Networking</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">psychology</span>
+<span class="font-label-mono text-label-mono">Mentorship</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-white/5 space-y-2">
+<button class="w-full mb-4 bg-gradient-to-r from-primary-container to-secondary-container text-white py-3 rounded-lg font-label-mono text-label-mono hover:brightness-110 shadow-[0_0_15px_rgba(37,99,235,0.2)] transition-all smooth-transition flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Create Event
+                </button>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface p-3 hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+<span class="font-label-mono text-label-mono">Support</span>
+</a>
+<a class="flex items-center gap-3 text-on-error hover:text-error p-3 hover:bg-error-container/10 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+<span class="font-label-mono text-label-mono">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-[280px] pt-[80px] p-gutter max-w-container-max mx-auto w-full flex flex-col xl:flex-row gap-8">
+<!-- Center/Left: Calendar Area -->
+<div class="flex-1 flex flex-col h-full min-h-[800px]">
+<!-- Calendar Header / Controls -->
+<header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Event Calendar</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">October 2024 · Eastern Orbital Time</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low border border-white/10 rounded-lg p-1 glass-card-top-light">
+<button class="px-4 py-1.5 rounded-md bg-surface-variant text-on-surface font-label-mono text-label-mono shadow-sm smooth-transition">Month</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-white/5 font-label-mono text-label-mono smooth-transition">Week</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-white/5 font-label-mono text-label-mono smooth-transition">List</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-md border border-white/10 hover:bg-white/5 text-on-surface-variant smooth-transition">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-4 py-2 rounded-md border border-white/10 hover:bg-white/5 font-label-mono text-label-mono text-on-surface-variant smooth-transition">Today</button>
+<button class="p-2 rounded-md border border-white/10 hover:bg-white/5 text-on-surface-variant smooth-transition">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</header>
+<!-- Calendar Grid -->
+<div class="flex-1 glass-panel rounded-xl glass-card-top-light overflow-hidden flex flex-col">
+<!-- Days Header -->
+<div class="grid grid-cols-7 border-b border-white/10 bg-surface-container-low/50">
+<div class="py-3 text-center font-label-mono text-label-mono text-on-surface-variant border-r border-white/5">SUN</div>
+<div class="py-3 text-center font-label-mono text-label-mono text-on-surface-variant border-r border-white/5">MON</div>
+<div class="py-3 text-center font-label-mono text-label-mono text-on-surface-variant border-r border-white/5">TUE</div>
+<div class="py-3 text-center font-label-mono text-label-mono text-on-surface-variant border-r border-white/5">WED</div>
+<div class="py-3 text-center font-label-mono text-label-mono text-on-surface-variant border-r border-white/5">THU</div>
+<div class="py-3 text-center font-label-mono text-label-mono text-on-surface-variant border-r border-white/5">FRI</div>
+<div class="py-3 text-center font-label-mono text-label-mono text-on-surface-variant">SAT</div>
+</div>
+<!-- Grid Cells (Simplified 5 rows for demo) -->
+<div class="flex-1 grid grid-cols-7 grid-rows-5 bg-surface/30">
+<!-- Row 1 -->
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] opacity-50 relative group">
+<span class="font-body-sm text-body-sm text-on-surface-variant">29</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] opacity-50 relative group">
+<span class="font-body-sm text-body-sm text-on-surface-variant">30</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">1</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">2</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">3</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">4</span>
+<!-- Event Block: Hackathon -->
+<div class="mt-1 w-full bg-primary-container/20 border border-primary/30 rounded px-1.5 py-1 flex items-center gap-1 cursor-pointer hover:bg-primary-container/30 smooth-transition">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<span class="font-label-mono text-[10px] leading-tight text-primary truncate">Web3 Hackathon</span>
+</div>
+</div>
+<div class="border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">5</span>
+<!-- Event Block: Hackathon continues -->
+<div class="mt-1 w-full bg-primary-container/20 border border-primary/30 rounded px-1.5 py-1 flex items-center gap-1 cursor-pointer hover:bg-primary-container/30 smooth-transition">
+<span class="font-label-mono text-[10px] leading-tight text-primary truncate">Day 2</span>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">6</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">7</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition bg-surface-variant/20">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-on-primary font-body-sm text-body-sm font-bold">8</span>
+<!-- Event Block: Bootcamp -->
+<div class="mt-1 w-full bg-secondary-container/20 border border-secondary/30 rounded px-1.5 py-1 flex items-center gap-1 cursor-pointer hover:bg-secondary-container/30 smooth-transition">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<span class="font-label-mono text-[10px] leading-tight text-secondary truncate">AI Founder Bootcamp</span>
+</div>
+<div class="mt-1 w-full bg-tertiary-container/20 border border-tertiary/30 rounded px-1.5 py-1 flex items-center gap-1 cursor-pointer hover:bg-tertiary-container/30 smooth-transition">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="font-label-mono text-[10px] leading-tight text-tertiary truncate">Investor Mixer</span>
+</div>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">9</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">10</span>
+</div>
+<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">11</span>
+</div>
+<div class="border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition">
+<span class="font-body-sm text-body-sm text-on-surface">12</span>
+</div>
+<!-- Row 3, 4, 5 Simplified to empty cells for brevity -->
+<div class="col-span-7 row-span-3 grid grid-cols-7 grid-rows-3">
+<!-- Generative empty cells to fill grid -->
+<script>
+                            for(let i=13; i<=31; i++) {
+                                document.write(`<div class="border-r border-b border-white/5 p-2 min-h-[120px] relative group hover:bg-white/5 smooth-transition"><span class="font-body-sm text-body-sm text-on-surface">${i}</span></div>`);
+                            }
+                            for(let i=1; i<=2; i++) {
+                                document.write(`<div class="border-r border-b border-white/5 p-2 min-h-[120px] opacity-50 relative group"><span class="font-body-sm text-body-sm text-on-surface-variant">${i}</span></div>`);
+                            }
+                        </script>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="mt-6 flex flex-wrap gap-6 items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Legend:</span>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-primary border border-primary/50"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Hackathons</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-secondary border border-secondary/50"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Bootcamps</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-tertiary border border-tertiary/50"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Networking</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-outline border border-outline/50"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Other</span>
+</div>
+</div>
+</div>
+<!-- Right: Sidebar -->
+<aside class="w-full xl:w-[320px] flex flex-col gap-6">
+<div class="glass-panel p-5 rounded-xl glass-card-top-light">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">upcoming</span>
+                    Upcoming This Week
+                </h3>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="group relative pl-4 border-l-2 border-secondary hover:border-secondary-fixed transition-colors">
+<div class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(208,188,255,0.8)]"></div>
+<div class="font-label-mono text-[10px] text-secondary mb-1">TUE, OCT 8 · 10:00 AM</div>
+<h4 class="font-body-base text-body-base font-semibold text-on-surface group-hover:text-primary-fixed smooth-transition">AI Founder Bootcamp</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">Intensive session on scaling LLM infrastructure for early-stage startups.</p>
+<div class="mt-2 flex -space-x-2">
+<img alt="Attendee" class="w-6 h-6 rounded-full border border-surface" data-alt="A small, circular avatar portrait of a diverse tech professional, illuminated by soft blue studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXqsglZE8FlvEjFmHV19xMHlKPnMtY3nWepqFgPuRJIlIBEdzVxIRX0N2YfhPASDVmuFIpDFk85STbhft-9QL2D-rZu9SHZAzS-Hbl0bSycp7LXzCUa-MvsiG0nVVZC9HLkjpjcBi3cIssgPksuHgDaNq8xrMUnWz3JbvGxl5yKo5UkgLtBfJLKWRV74Sv72NDveZKGDk2dFq3NvaZpNob_eh3bhEs5_NfenuQH0H6JXGf09Kl045qP2ypBDbpKDT6oWFrjTCgm-s"/>
+<img alt="Attendee" class="w-6 h-6 rounded-full border border-surface" data-alt="A small, circular avatar portrait of a diverse tech professional, illuminated by soft purple studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA726tN75d_k6PY7DIMcAUFPoRCz7Hb9mOljeFkv6H3CKUYqje_aIXb1eYEp_8oJMhiwM1iCZ6focMLH5PyjmhVDxufHniiy_hwYMXeNSDq9JVaV8DlchsK2TnxgaBB9LLUm9iqezgKlOgEDB9tlCIYtqpK6Gf0nBaToVc6n4OFG-MkNVXsZxr-BH5Ls5WLtH4HsyA3fuyAxci7fDJMTqMCybBo5k7GvNicgyd8PKSBsgvTxV9LkkrwT_sl7AcwoqX8JxOdAbyeJaU"/>
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-variant flex items-center justify-center font-label-mono text-[8px] text-on-surface">+12</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group relative pl-4 border-l-2 border-tertiary hover:border-tertiary-fixed transition-colors">
+<div class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(74,225,118,0.8)]"></div>
+<div class="font-label-mono text-[10px] text-tertiary mb-1">TUE, OCT 8 · 6:00 PM</div>
+<h4 class="font-body-base text-body-base font-semibold text-on-surface group-hover:text-primary-fixed smooth-transition">Investor Mixer</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">Networking event with Tier 1 VC partners at the downtown loft.</p>
+<div class="mt-2 flex items-center gap-1 font-label-mono text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                            Downtown Hub
+                        </div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-white/10 rounded-lg font-label-mono text-label-mono text-on-surface hover:bg-white/5 smooth-transition">
+                    View All Upcoming
+                </button>
+</div>
+<!-- Mini Calendar / Date Picker aesthetic -->
+<div class="glass-panel p-5 rounded-xl glass-card-top-light hidden xl:block">
+<h3 class="font-body-base text-body-base font-semibold text-on-surface mb-3">Quick Jump</h3>
+<!-- Minimalist visual element representing months -->
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center py-2 rounded bg-white/5 font-label-mono text-[10px] text-on-surface-variant hover:bg-white/10 cursor-pointer">AUG</div>
+<div class="text-center py-2 rounded bg-white/5 font-label-mono text-[10px] text-on-surface-variant hover:bg-white/10 cursor-pointer">SEP</div>
+<div class="text-center py-2 rounded bg-primary/20 border border-primary/30 font-label-mono text-[10px] text-primary cursor-pointer">OCT</div>
+<div class="text-center py-2 rounded bg-white/5 font-label-mono text-[10px] text-on-surface-variant hover:bg-white/10 cursor-pointer">NOV</div>
+<div class="text-center py-2 rounded bg-white/5 font-label-mono text-[10px] text-on-surface-variant hover:bg-white/10 cursor-pointer">DEC</div>
+<div class="text-center py-2 rounded bg-white/5 font-label-mono text-[10px] text-on-surface-variant hover:bg-white/10 cursor-pointer">JAN</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 mt-auto bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto font-body-sm text-body-sm text-primary">
+<div class="font-bold text-on-surface mb-4 md:mb-0">
+                LaunchNest
+            </div>
+<div class="text-on-surface-variant text-center mb-4 md:mb-0">
+                © 2024 LaunchNest Orbital System. All rights reserved.
+            </div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</body></html>

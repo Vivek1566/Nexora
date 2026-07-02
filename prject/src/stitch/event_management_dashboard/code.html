@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Upcoming Events</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#2d3449",
+                      "surface": "#0b1326",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-container-low": "#131b2e",
+                      "inverse-on-surface": "#283044",
+                      "secondary-container": "#571bc1",
+                      "primary-container": "#2563eb",
+                      "on-error": "#690005",
+                      "on-tertiary-fixed": "#002109",
+                      "on-secondary-container": "#c4abff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "surface-container-highest": "#2d3449",
+                      "tertiary-fixed": "#6bff8f",
+                      "secondary": "#d0bcff",
+                      "primary": "#b4c5ff",
+                      "on-secondary-fixed": "#23005c",
+                      "outline-variant": "#434655",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "surface-container": "#171f33",
+                      "on-secondary": "#3c0091",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "inverse-surface": "#dae2fd",
+                      "surface-tint": "#b4c5ff",
+                      "surface-bright": "#31394d",
+                      "on-background": "#dae2fd",
+                      "outline": "#8d90a0",
+                      "tertiary-container": "#007e37",
+                      "background": "#0b1326",
+                      "tertiary": "#4ae176",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "surface-dim": "#0b1326",
+                      "on-error-container": "#ffdad6",
+                      "error": "#ffb4ab",
+                      "secondary-fixed": "#e9ddff",
+                      "on-primary-container": "#eeefff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "surface-container-lowest": "#060e20",
+                      "surface-container-high": "#222a3d",
+                      "on-surface": "#dae2fd",
+                      "error-container": "#93000a",
+                      "inverse-primary": "#0053db",
+                      "on-primary": "#002a78",
+                      "on-primary-fixed": "#00174b",
+                      "on-tertiary-container": "#c1ffc5",
+                      "on-surface-variant": "#c3c6d7",
+                      "on-tertiary": "#003915"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "margin-desktop": "40px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ],
+                      "body-base": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-base": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, theme('colors.primary-container'), theme('colors.secondary-container'));
+            color: theme('colors.on-primary-container');
+            border-radius: theme('borderRadius.lg');
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(87, 27, 193, 0.4);
+            filter: brightness(1.1);
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: theme('colors.on-surface');
+            border-radius: theme('borderRadius.lg');
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .nav-item-active {
+            background: rgba(87, 27, 193, 0.2);
+            border-right: 4px solid theme('colors.secondary');
+            border-radius: 0 theme('borderRadius.full') theme('borderRadius.full') 0;
+            color: theme('colors.secondary');
+        }
+        /* Top border highlight for cards */
+        .card-highlight {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base antialiased min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop) -->
+<nav class="bg-surface-container-low/50 backdrop-blur-2xl text-secondary font-label-mono text-label-mono fixed left-0 top-0 h-full w-[280px] hidden lg:flex flex-col border-r border-white/5 shadow-2xl shadow-black/50 z-40 transition-all cubic-bezier(0.4, 0, 0.2, 1) p-margin-mobile gap-unit">
+<div class="flex items-center gap-4 p-4 mb-8">
+<img class="w-10 h-10 rounded-lg bg-surface-variant object-cover" data-alt="A sleek, minimalist logo icon for a futuristic tech startup called LaunchNest, featuring a stylized nest or rocket motif in bright white and vibrant blue on a dark navy background. The design is geometric and modern, conveying high-velocity growth and professional enterprise software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ni7h5I9nJKJ0CP90cOd0qA9FGFCL74kP1QUmj6930UZNHqPwEyPU4WaLc9Y1os3e6jr4wdYSh2YfDFTkvQBSurIVtpfKqQMhuo8QfPiVA18nNLRp2OFmaGQwighC6q5hn5MUKkL1c_iXkAv-iH7CdnswgsCWD9oY02PNIACW56yV8_abAgcZuHHM1GaZG-5yV8G44lN5Yql-_zmsWMbI3BNB7G-mN60xBl5QIHy2hEb1Q5_9Mo8OAVfr27zcnK6qaGHPaCHQ5y0"/>
+<div>
+<h1 class="font-headline-md text-primary tracking-tight">LaunchNest</h1>
+<p class="text-on-surface-variant text-label-mono mt-1 opacity-70">Orbital Nav / Founder Edition</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Active Tab Intent Logic: The user wants to see "Events". 
+                 The available tabs are ["Dashboard", "Hackathons", "Bootcamps", "Networking", "Mentorship"].
+                 We will highlight "Hackathons" as the primary active tab since the main feature is a Hackathon card, 
+                 or perhaps just list them as provided. The JSON lists these exact labels. -->
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 p-3 bg-secondary-container/20 text-secondary border-r-4 border-secondary rounded-l-none rounded-r-full transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+                Hackathons
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+                Bootcamps
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                Networking
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+                Mentorship
+            </a>
+</div>
+<button class="btn-primary w-full py-3 mb-6 font-label-mono text-label-mono flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+            Create Event
+        </button>
+<div class="flex flex-col gap-2 mt-auto pt-4 border-t border-white/5">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 rounded-lg transition-all cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 lg:ml-[280px] flex flex-col min-h-screen">
+<!-- TopNavBar (Web & Mobile) -->
+<header class="bg-surface/80 backdrop-blur-xl text-primary font-body-base text-body-base fixed top-0 w-full lg:w-[calc(100%-280px)] z-30 border-b border-white/10 shadow-md transition-all duration-300 px-gutter py-4 flex justify-between items-center">
+<div class="lg:hidden">
+<span class="font-headline-md font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">LaunchNest</span>
+</div>
+<div class="hidden lg:flex gap-6">
+<!-- Navigation links from JSON -->
+<a class="text-primary border-b-2 border-primary pb-1 active:scale-95 duration-200" href="#">Events</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 px-2 py-1 rounded active:scale-95 duration-200" href="#">Calendar</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 px-2 py-1 rounded active:scale-95 duration-200" href="#">My Portal</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-variant border border-white/10 overflow-hidden cursor-pointer hover:border-primary transition-colors">
+<img alt="Founder Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a confident startup founder in their 30s. They are wearing a smart-casual dark blazer over a simple t-shirt. The background is a blurred modern office environment with subtle cool-toned blue and violet lighting. High quality, crisp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA56JYYkSogdDYfG3owxMpOA5xb9jqC4bAmqOMnIBDyZMV2u6Nef7jzE_zsQUoGmLhje5gjnVCurd6plqAW3Ett2VGBOqKDbV8N3iH7Ue7675CTJIlUfW5CHC__vKj6gJWyzHi3uPcra8CrJTac88WVT1XC6F9caewHEg9ZtFnHsk81rKj-ysTFJmOFgER8_NdgfRS9hMi7q5ZqBDgsnq-aez03UnJ2bI5Bqh51EzG_Mqt3jNBqFZgigqAZDpmaxL6_N_4SbZFdGcU"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop mt-[72px] max-w-container-max mx-auto w-full flex flex-col xl:flex-row gap-gutter">
+<div class="flex-1 flex flex-col gap-gutter">
+<!-- Hero Section: Featured Event -->
+<section class="glass-panel card-highlight rounded-xl overflow-hidden relative group">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-700" data-alt="An abstract, high-tech digital art background representing a winter-themed hackathon. Futuristic glowing geometric shapes, data streams, and subtle snowflake motifs rendered in a sophisticated palette of deep navy blues, icy cyan, and vibrant violet. The lighting is dramatic and cinematic, suggesting innovation and coding late into the night." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-g1s4Z9t321E4Kd6fLRYhdRenKKrkEsVpXDGS-ZHNddWdFuzuoot19TssMXFDQhsQJp7rT5m9p0AfJ2MvXVVcPzXXbYB0uD8g-z8P16EdZ4PjJhDB_peFKg5EXehPB-xxZclGsmW68Fcs_NllcDi3zaab-36qKj3Qsn38cUEnyxk8JOWNNKaiA46tzEU3e6DE0h80VfassfC-MjsZEIeexaIoxOiaYSqivHoEE2tf14P77U5eMtKH4WQPk63ODLv22uhFDOZSooM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 md:p-12 flex flex-col md:flex-row justify-between items-end gap-6 h-full">
+<div class="w-full md:w-2/3 space-y-4">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary-container/20 border border-tertiary/30 text-tertiary font-label-mono text-label-mono">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                                Featured
+                            </span>
+<h2 class="font-display-lg-mobile md:font-display-lg text-on-surface tracking-tight">Winter Hackathon 2024</h2>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-xl">Join elite developers and visionary founders to build the next generation of decentralized AI applications. 48 hours to change the future.</p>
+<div class="flex gap-6 mt-6">
+<div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-1">Prize Pool</p>
+<p class="font-headline-md text-tertiary">$50,000</p>
+</div>
+<div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-1">Starts In</p>
+<p class="font-headline-md text-primary">14d : 08h : 22m</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-auto">
+<button class="btn-primary w-full md:w-auto px-8 py-4 font-body-base text-body-base font-semibold shadow-lg shadow-primary-container/20">
+                                Register Now
+                            </button>
+</div>
+</div>
+</section>
+<!-- Search & Filters -->
+<section class="flex flex-col md:flex-row gap-4 items-center justify-between glass-panel p-2 rounded-xl">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-white/5 rounded-lg py-2 pl-10 pr-4 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-on-surface-variant/50" placeholder="Search events..." type="text"/>
+</div>
+<div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+<button class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-on-surface-variant text-body-sm font-body-sm whitespace-nowrap transition-colors border border-white/5">
+                            Category: All
+                        </button>
+<button class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-on-surface-variant text-body-sm font-body-sm whitespace-nowrap transition-colors border border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> Date
+                        </button>
+<button class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-on-surface-variant text-body-sm font-body-sm whitespace-nowrap transition-colors border border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Status
+                        </button>
+</div>
+</section>
+<!-- Event Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="glass-panel card-highlight rounded-xl p-6 flex flex-col gap-4 group hover:border-primary/30 transition-colors duration-300">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-secondary-container/20 rounded-lg text-secondary group-hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<span class="px-2 py-1 rounded bg-surface-variant text-on-surface-variant font-label-mono text-[10px] tracking-wider uppercase">Open</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface text-[20px] mb-1 group-hover:text-primary transition-colors">Founder Pitch Night</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Connect with seed-stage investors in a rapid-fire pitch format.</p>
+</div>
+<div class="mt-auto space-y-2 border-t border-white/5 pt-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Oct 24, 2024 • 6:00 PM</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>San Francisco, CA</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel card-highlight rounded-xl p-6 flex flex-col gap-4 group hover:border-primary/30 transition-colors duration-300">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-primary-container/20 rounded-lg text-primary group-hover:bg-primary-container/40 transition-colors">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<span class="px-2 py-1 rounded bg-tertiary-container/20 text-tertiary border border-tertiary/20 font-label-mono text-[10px] tracking-wider uppercase">Registered</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface text-[20px] mb-1 group-hover:text-primary transition-colors">AI/ML Bootcamp</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Intensive 3-day workshop on deploying LLMs in production environments.</p>
+</div>
+<div class="mt-auto space-y-2 border-t border-white/5 pt-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Nov 05 - Nov 08, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px]">public</span>
+<span>Remote (Zoom)</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel card-highlight rounded-xl p-6 flex flex-col gap-4 group hover:border-primary/30 transition-colors duration-300">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-surface-variant rounded-lg text-on-surface-variant group-hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<span class="px-2 py-1 rounded bg-error-container/20 text-error border border-error/20 font-label-mono text-[10px] tracking-wider uppercase">Waitlist</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface text-[20px] mb-1 group-hover:text-primary transition-colors">Investor Networking</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Exclusive roundtable discussions with top-tier VC partners.</p>
+</div>
+<div class="mt-auto space-y-2 border-t border-white/5 pt-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Dec 12, 2024 • 4:00 PM</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>New York, NY</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Sidebar: My Calendar Widget -->
+<div class="w-full xl:w-80 flex-shrink-0 space-y-6">
+<div class="glass-panel card-highlight rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-on-surface text-[20px]">My Calendar</h3>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Mock Calendar Month View Header -->
+<div class="flex items-center justify-between text-on-surface-variant mb-4">
+<button class="p-1 hover:bg-white/5 rounded transition-colors"><span class="material-symbols-outlined text-[20px]">chevron_left</span></button>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-on-surface">October 2024</span>
+<button class="p-1 hover:bg-white/5 rounded transition-colors"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+<!-- Upcoming Schedule List -->
+<div class="space-y-4">
+<div class="flex gap-4 relative">
+<!-- Timeline line -->
+<div class="absolute left-[11px] top-6 bottom-[-16px] w-[2px] bg-white/5"></div>
+<div class="flex flex-col items-center mt-1 z-10">
+<div class="w-6 h-6 rounded-full bg-surface border-2 border-tertiary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-low/50 border border-white/5 rounded-lg p-3 hover:border-white/10 transition-colors cursor-pointer">
+<p class="font-label-mono text-[10px] text-tertiary mb-1">TODAY • 2:00 PM</p>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Mentor 1:1 Session</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Virtual</p>
+</div>
+</div>
+<div class="flex gap-4 relative">
+<div class="absolute left-[11px] top-6 bottom-[-16px] w-[2px] bg-white/5"></div>
+<div class="flex flex-col items-center mt-1 z-10">
+<div class="w-6 h-6 rounded-full bg-surface border-2 border-primary/50 flex items-center justify-center"></div>
+</div>
+<div class="flex-1 bg-surface-container-low/50 border border-white/5 rounded-lg p-3 hover:border-white/10 transition-colors cursor-pointer">
+<p class="font-label-mono text-[10px] text-primary mb-1">OCT 24 • 6:00 PM</p>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Founder Pitch Night</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">San Francisco, CA</p>
+</div>
+</div>
+<div class="flex gap-4 relative">
+<div class="flex flex-col items-center mt-1 z-10">
+<div class="w-6 h-6 rounded-full bg-surface border-2 border-white/20 flex items-center justify-center"></div>
+</div>
+<div class="flex-1 bg-surface-container-low/50 border border-white/5 rounded-lg p-3 hover:border-white/10 transition-colors cursor-pointer opacity-70">
+<p class="font-label-mono text-[10px] text-on-surface-variant mb-1">NOV 05 • 9:00 AM</p>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">AI/ML Bootcamp Day 1</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Remote</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-white/10 rounded-lg text-on-surface-variant font-label-mono text-label-mono hover:bg-white/5 hover:text-on-surface transition-colors">
+                        View Full Calendar
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - Document Vault</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#dae2fd",
+                        "inverse-on-surface": "#283044",
+                        "on-background": "#dae2fd",
+                        "surface-tint": "#b4c5ff",
+                        "background": "#0b1326",
+                        "inverse-surface": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#002109",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#222a3d",
+                        "on-primary-container": "#eeefff",
+                        "tertiary": "#4ae176",
+                        "surface-bright": "#31394d",
+                        "primary-container": "#2563eb",
+                        "tertiary-fixed": "#6bff8f",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#434655",
+                        "outline": "#8d90a0",
+                        "surface-container-low": "#131b2e",
+                        "secondary-fixed": "#e9ddff",
+                        "tertiary-container": "#007e37",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "primary-fixed": "#dbe1ff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "surface-container-highest": "#2d3449",
+                        "surface-container": "#171f33",
+                        "on-primary": "#002a78",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary": "#b4c5ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "inverse-primary": "#0053db",
+                        "secondary-container": "#571bc1",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary": "#003915",
+                        "surface": "#0b1326",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-secondary-fixed": "#23005c",
+                        "on-secondary": "#3c0091",
+                        "secondary": "#d0bcff",
+                        "on-tertiary-container": "#c1ffc5",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-secondary-container": "#c4abff",
+                        "surface-dim": "#0b1326"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-md": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "body-base": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        .primary-gradient-btn {
+            background: linear-gradient(135deg, #2563eb, #571bc1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .primary-gradient-btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px rgba(87, 27, 193, 0.4);
+        }
+        .top-glow {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base antialiased selection:bg-primary-container selection:text-on-primary-container h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col p-6 gap-2 bg-surface-container-low/50 backdrop-blur-xl dark:bg-surface-container-low/50 border-r border-outline-variant/10 shadow-xl fixed left-0 top-0 h-screen w-[280px] z-40 transition-all duration-300 cubic-bezier(0.4, 0, 0.2, 1)">
+<div class="flex items-center gap-4 mb-8">
+<img alt="Organization Logo" class="w-10 h-10 rounded-lg object-cover" data-alt="A sleek, futuristic organization logo featuring geometric shapes in deep blue and vibrant violet, conveying an enterprise-grade startup incubation portal atmosphere against a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwudLYp92aNAFi2CCzliCPK7xROOItLnLewBtCPVah-ilypJcJ3rw9YiKlC4H-HW2sdwNwd_rk2mHkvkcfJKhCg6YFUoA2NeMCXHdbV-ktfy9vB3uSnCf2E1NhVtDxkFMeAXv5iRz1a1IuqOU-PB0YsMf_JtE6pcqchshCU2H830fooCGJ5vuHlokoT9Mjc57pzpF-ZvC8k7oCypA1aemo8sNmF5ULhf4qWznJlsKtTRh9jAyiKzpFVLfa98n6YmQaEuLjHbheNHU"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">LaunchNest</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Incubation Portal</p>
+</div>
+</div>
+<button class="primary-gradient-btn w-full py-3 rounded-lg font-body-sm text-on-primary-container mb-6 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+            Upload Document
+        </button>
+<div class="flex-1 overflow-y-auto space-y-1 pr-2">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                Portfolio
+            </a>
+<a class="flex items-center gap-3 p-3 bg-primary-container text-on-primary-container rounded-lg font-bold transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">folder</span>
+                Vault
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">group</span>
+                Network
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">event_available</span>
+                Sessions
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/10 space-y-1">
+<div class="glass-card p-4 rounded-lg mb-4">
+<p class="font-label-mono text-label-mono text-on-surface mb-2">Storage Usage</p>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mb-2">
+<div class="bg-tertiary-fixed h-2 rounded-full" style="width: 45%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">45GB of 100GB Used</p>
+</div>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help Center
+            </a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg transition-all duration-300 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[280px] p-gutter h-full overflow-hidden flex flex-col relative">
+<!-- Top Bar -->
+<header class="flex justify-between items-center mb-8">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface tracking-tight">Document Vault</h2>
+<div class="flex items-center gap-4">
+<div class="relative glass-card rounded-lg flex items-center px-4 w-64 focus-within:border-primary focus-within:shadow-[0_0_10px_rgba(37,99,235,0.2)] transition-all">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none text-on-surface focus:ring-0 w-full py-2 font-body-sm" placeholder="Search files..." type="text"/>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant/20" data-alt="A professional headshot of a user in a dark, high-tech startup environment, illuminated by cool blue and purple lighting, conveying authority and enterprise readiness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoGGnoSFKFEBV8PgjpmMb132rksA2aCkUOzpsGzUFmNJRpDgWyUzsRSP0wYn9L6lHKuziMXRgorkbRfkHrfOt8GNLDJmndM66k44hwQ0JfBw1FCJ4q0cnuJWhY0eQQZOjYRGSYM06EQdTTtrAD6LoQ8f34DvGRdy35b1nUXsMeM-EBjuEGxhyy8-W8Ylckt-Io5TpgWJHeAykUZPLV_Y-CF9it_iPXfbKQ7rkl9IDVMEHstQ6nIKVew0G5idLp74wMFTCRMX46R1k"/>
+</div>
+</header>
+<!-- Main Layout Split -->
+<div class="flex-1 flex gap-6 overflow-hidden">
+<!-- Left Side: Categories & Files -->
+<div class="flex-1 flex flex-col gap-6 overflow-hidden">
+<!-- Filters / Categories -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-mono text-label-mono whitespace-nowrap top-glow border border-primary-container">All Documents</button>
+<button class="px-4 py-2 rounded-full glass-card text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono whitespace-nowrap">Pitch Decks</button>
+<button class="px-4 py-2 rounded-full glass-card text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono whitespace-nowrap">Financials</button>
+<button class="px-4 py-2 rounded-full glass-card text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono whitespace-nowrap">Legal</button>
+<button class="px-4 py-2 rounded-full glass-card text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono whitespace-nowrap">Product</button>
+<button class="px-4 py-2 rounded-full glass-card text-on-surface-variant hover:text-on-surface transition-colors font-label-mono text-label-mono whitespace-nowrap">Shared with me</button>
+</div>
+<!-- File List Table (Glassmorphic) -->
+<div class="glass-card flex-1 rounded-xl overflow-hidden flex flex-col top-glow">
+<div class="grid grid-cols-12 gap-4 p-4 border-b border-outline-variant/20 font-label-mono text-label-mono text-on-surface-variant bg-surface-container/50">
+<div class="col-span-5">Name</div>
+<div class="col-span-2">Category</div>
+<div class="col-span-2">Modified</div>
+<div class="col-span-1">Ver.</div>
+<div class="col-span-2 text-right">Status</div>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-1">
+<!-- File Row 1 -->
+<div class="grid grid-cols-12 gap-4 p-3 items-center hover:bg-surface-variant/20 rounded-lg cursor-pointer transition-colors group">
+<div class="col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+</div>
+<span class="font-body-sm text-on-surface truncate group-hover:text-primary transition-colors">Q4_Financial_Projections_Final.pdf</span>
+</div>
+<div class="col-span-2 font-body-sm text-on-surface-variant truncate">Financials</div>
+<div class="col-span-2 font-body-sm text-on-surface-variant truncate">Oct 24, 2023</div>
+<div class="col-span-1 font-label-mono text-on-surface-variant">v3.1</div>
+<div class="col-span-2 text-right">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-mono bg-tertiary-container/20 text-tertiary">Shared</span>
+</div>
+</div>
+<!-- File Row 2 -->
+<div class="grid grid-cols-12 gap-4 p-3 items-center bg-surface-variant/30 rounded-lg cursor-pointer transition-colors border border-primary/20">
+<div class="col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-sm">slideshow</span>
+</div>
+<span class="font-body-sm text-on-surface font-semibold truncate">Series_A_Pitch_Deck_Master.pptx</span>
+</div>
+<div class="col-span-2 font-body-sm text-on-surface-variant truncate">Pitch Decks</div>
+<div class="col-span-2 font-body-sm text-on-surface-variant truncate">Today, 2:30 PM</div>
+<div class="col-span-1 font-label-mono text-on-surface-variant">v5.0</div>
+<div class="col-span-2 text-right">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-mono bg-surface-container-high text-on-surface-variant border border-outline-variant/30">Internal</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Details Panel -->
+<aside class="w-80 glass-panel rounded-xl flex flex-col top-glow overflow-hidden hidden lg:flex">
+<div class="p-6 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container/30">
+<h3 class="font-headline-md text-headline-md text-on-surface">File Details</h3>
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+<!-- Thumbnail -->
+<div class="w-full h-40 rounded-lg bg-surface-container-high border border-outline-variant/20 flex flex-col items-center justify-center relative overflow-hidden group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-2 relative z-10">slideshow</span>
+<p class="font-body-sm text-on-surface-variant relative z-10">PPTX Document</p>
+<div class="absolute inset-0 bg-gradient-to-tr from-surface-container-lowest to-surface-container-highest opacity-50"></div>
+</div>
+<!-- Meta -->
+<div>
+<h4 class="font-body-base font-semibold text-on-surface break-words mb-4">Series_A_Pitch_Deck_Master.pptx</h4>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Size</span>
+<span class="font-body-sm text-on-surface">24.5 MB</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Created</span>
+<span class="font-body-sm text-on-surface">Oct 12, 2023</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Modified By</span>
+<span class="font-body-sm text-on-surface">Sarah Chen</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-sm transition-colors border border-outline-variant/30 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span> View
+                        </button>
+<button class="flex-1 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-body-sm transition-colors border border-primary/20 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> Get
+                        </button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

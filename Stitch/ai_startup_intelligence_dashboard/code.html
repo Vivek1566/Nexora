@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LaunchNest - AI Startup Score</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#c3c6d7",
+                      "on-secondary-fixed": "#23005c",
+                      "primary-container": "#2563eb",
+                      "on-tertiary-container": "#c1ffc5",
+                      "inverse-surface": "#dae2fd",
+                      "primary-fixed": "#dbe1ff",
+                      "background": "#0b1326",
+                      "surface-tint": "#b4c5ff",
+                      "surface-container": "#171f33",
+                      "on-primary": "#002a78",
+                      "error": "#ffb4ab",
+                      "surface-container-high": "#222a3d",
+                      "surface-dim": "#0b1326",
+                      "on-surface": "#dae2fd",
+                      "tertiary-fixed": "#6bff8f",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "inverse-on-surface": "#283044",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "surface-bright": "#31394d",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#002109",
+                      "on-primary-fixed": "#00174b",
+                      "outline": "#8d90a0",
+                      "secondary-container": "#571bc1",
+                      "outline-variant": "#434655",
+                      "tertiary-container": "#007e37",
+                      "on-tertiary": "#003915",
+                      "inverse-primary": "#0053db",
+                      "tertiary": "#4ae176",
+                      "surface-container-low": "#131b2e",
+                      "surface-variant": "#2d3449",
+                      "on-secondary-container": "#c4abff",
+                      "primary": "#b4c5ff",
+                      "surface-container-highest": "#2d3449",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-background": "#dae2fd",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "on-primary-container": "#eeefff",
+                      "error-container": "#93000a",
+                      "surface-container-lowest": "#060e20",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-secondary": "#3c0091",
+                      "secondary": "#d0bcff",
+                      "surface": "#0b1326",
+                      "secondary-fixed": "#e9ddff",
+                      "on-error": "#690005"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "display-lg-mobile": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "body-base": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-base": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .glass-panel-elevated {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #571bc1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(87, 27, 193, 0.5);
+            filter: brightness(1.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #dae2fd;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .gauge-circle {
+            stroke-dasharray: 628;
+            stroke-dashoffset: 628;
+            animation: fillGauge 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fillGauge {
+            to { stroke-dashoffset: 80; } /* ~87% score */
+        }
+        
+        .radar-chart {
+            background-image: 
+                radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px, 100px 100px, 100px 100px;
+            background-position: center center;
+        }
+    </style>
+</head>
+<body class="font-body-base text-body-base flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col p-6 gap-2 bg-surface-container-low/50 backdrop-blur-xl dark:bg-surface-container-low/50 border-r border-outline-variant/10 shadow-xl fixed left-0 top-0 h-screen w-[280px] z-40">
+<div class="flex items-center gap-4 mb-8">
+<img class="w-10 h-10 rounded-lg object-cover" data-alt="A sleek, futuristic logo for LaunchNest, featuring a stylized minimalist nest and rocket motif in vibrant violet and primary blue, set against a dark glassmorphic background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGQJHvhzQT3lZ-5p4LMqmxn6S-m0npf_GkOq6whc9U3l8oj7WaD30oEJKgTFuUBxmbVOw5_Fyktg-uOsXaUshXWDBUj5YCtpXiW1Mim9UvLdenhUYBtvPO_D0wThwm5eJ_b7DMxBhDYHCN5TEK5wnl35GJY0arq1RbsvKLEKPUjtf9bw7vxiUpQ1j_fCNHHFsecnTIjL8Lbw6V1AoBjVgj8Zm83_Em6VlmYjd4N3qXBtPSVzsbMhyJ-neNrKnEb4QbPU8f7fQKL-Q"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">LaunchNest</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Incubation Portal</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<!-- Active State on Dashboard for now, assuming this is a dashboard view -->
+<a class="flex items-center gap-3 p-3 bg-primary-container text-on-primary-container rounded-lg font-bold transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-mono text-label-mono">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="font-label-mono text-label-mono">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-mono text-label-mono">Network</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-mono text-label-mono">Sessions</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+</nav>
+<button class="btn-primary rounded-lg py-3 px-4 font-label-mono text-label-mono w-full mb-6">
+            Apply for Funding
+        </button>
+<div class="flex flex-col gap-2 border-t border-outline-variant/10 pt-4">
+<a class="flex items-center gap-3 p-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-mono text-label-mono">Help Center</span>
+</a>
+<a class="flex items-center gap-3 p-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg hover:text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-mono text-label-mono">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[280px] flex flex-col h-screen overflow-y-auto bg-background">
+<!-- TopNavBar (Mobile mainly, but keeping structure for search) -->
+<header class="sticky top-0 z-30 flex justify-between items-center px-gutter py-4 bg-surface/80 backdrop-blur-md dark:bg-surface/80 border-b border-outline-variant/10 shadow-sm w-full">
+<div class="md:hidden flex items-center gap-2">
+<span class="font-display-lg text-display-lg-mobile tracking-tighter text-primary dark:text-primary">LaunchNest</span>
+</div>
+<div class="hidden md:flex items-center w-96 glass-panel rounded-full px-4 py-2 ml-4">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full ml-2 text-on-surface-variant placeholder:text-outline/50" placeholder="Search startups, mentors..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block btn-secondary rounded-lg px-4 py-2 font-label-mono text-label-mono">
+                    Log In
+                </button>
+<button class="hidden md:block btn-primary rounded-lg px-4 py-2 font-label-mono text-label-mono">
+                    Get Started
+                </button>
+<img class="w-10 h-10 rounded-full border border-outline-variant/30 object-cover" data-alt="A professional headshot of a diverse startup founder, smiling confidently, illuminated by cool studio lighting with a subtle blue rim light, set against a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD17JTtSpgyn1FOc1R3eq_nD3lGb01uu-F6dgreG_OucVTu-fZEyScOkScCybROL0dAAzR0QxMpfl3NeXE2Zc7LMuoRktIxehtlorCJRc1Y-gyVt1bR5Mxy7UMHdP7GtCgzDntoB2nEp38qRGjH0np6Fm3qn8ZmfOir84mdDPOAEuF2VY9h42CECFUyzFamxF-Ou4icKPNffsTewpr-5IMtdD4MUWUGz9Dr62t1MCDWvJ1iirKMl0zL07fIaeuyzAJJYUBP-jD43bg"/>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-4 md:p-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-8">
+<!-- Hero / Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-4">
+<div>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Nexus AI</h2>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-2xl">
+                        AI Readiness Assessment &amp; Growth Trajectory Analysis. Nexus AI demonstrates strong product-market fit indicators with exceptional technical defensibility.
+                    </p>
+</div>
+<div class="flex gap-2">
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-mono text-label-mono border border-tertiary/30">Series A Ready</span>
+<span class="bg-primary-container/20 text-primary px-3 py-1 rounded-full font-label-mono text-label-mono border border-primary/30">Deep Tech</span>
+</div>
+</div>
+<!-- Main Score Card -->
+<div class="glass-panel-elevated rounded-xl p-8 relative overflow-hidden">
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<div class="flex flex-col md:flex-row items-center gap-12 relative z-10">
+<!-- Radial Gauge -->
+<div class="relative w-48 h-48 flex-shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 220 220">
+<!-- Background track -->
+<circle cx="110" cy="110" fill="none" r="100" stroke="rgba(255,255,255,0.05)" stroke-width="12"></circle>
+<!-- Progress track -->
+<circle class="gauge-circle" cx="110" cy="110" fill="none" r="100" stroke="url(#gradient)" stroke-linecap="round" stroke-width="12"></circle>
+<defs>
+<lineargradient id="gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#2563eb"></stop>
+<stop offset="100%" stop-color="#571bc1"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">87</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest">Score</span>
+</div>
+</div>
+<!-- Summary Content -->
+<div class="flex-1 flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md text-primary">High Potential Trajectory</h3>
+<p class="text-on-surface-variant font-body-base leading-relaxed">
+                            The LaunchNest AI engine indicates a high probability of successful Series A capitalization within 6-9 months. Core strengths lie in proprietary machine learning models and a rapidly expanding user base in the enterprise sector.
+                        </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-outline mb-1">Valuation Est.</span>
+<span class="font-body-base text-on-surface font-semibold">$12M - $15M</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-outline mb-1">Burn Rate</span>
+<span class="font-body-base text-tertiary font-semibold">Sustainable</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-outline mb-1">TAM</span>
+<span class="font-body-base text-on-surface font-semibold">$4.2B</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-outline mb-1">Founder Fit</span>
+<span class="font-body-base text-on-surface font-semibold">Exceptional</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid: Intelligence Insights -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Market Fit -->
+<div class="glass-panel rounded-xl p-6 flex flex-col hover:bg-surface-container-high/50 transition-colors border-t border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">pie_chart</span>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary bg-tertiary/10 px-2 py-1 rounded">92%</span>
+</div>
+<h4 class="font-body-base font-semibold text-on-surface mb-2">Market Fit</h4>
+<p class="font-body-sm text-on-surface-variant flex-1">
+                        Strong alignment with emerging enterprise needs. Early adoption metrics indicate high retention and organic growth.
+                    </p>
+</div>
+<!-- Technical Moat -->
+<div class="glass-panel rounded-xl p-6 flex flex-col hover:bg-surface-container-high/50 transition-colors border-t border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-secondary">memory</span>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary bg-tertiary/10 px-2 py-1 rounded">88%</span>
+</div>
+<h4 class="font-body-base font-semibold text-on-surface mb-2">Technical Moat</h4>
+<p class="font-body-sm text-on-surface-variant flex-1">
+                        Proprietary algorithms provide a significant 18-24 month advantage over closest competitors.
+                    </p>
+</div>
+<!-- Business Scalability -->
+<div class="glass-panel rounded-xl p-6 flex flex-col hover:bg-surface-container-high/50 transition-colors border-t border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-inverse-primary/20 rounded-lg">
+<span class="material-symbols-outlined text-inverse-primary">trending_up</span>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary bg-tertiary/10 px-2 py-1 rounded">85%</span>
+</div>
+<h4 class="font-body-base font-semibold text-on-surface mb-2">Business Scalability</h4>
+<p class="font-body-sm text-on-surface-variant flex-1">
+                        SaaS model supports rapid expansion, though customer acquisition costs (CAC) need slight optimization.
+                    </p>
+</div>
+<!-- Financial Sustainability -->
+<div class="glass-panel rounded-xl p-6 flex flex-col hover:bg-surface-container-high/50 transition-colors border-t border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error-container/20 rounded-lg">
+<span class="material-symbols-outlined text-error">account_balance</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface bg-surface-variant px-2 py-1 rounded">76%</span>
+</div>
+<h4 class="font-body-base font-semibold text-on-surface mb-2">Financial Sust.</h4>
+<p class="font-body-sm text-on-surface-variant flex-1">
+                        Current runway is 14 months. Approaching critical mass where recurring revenue will offset primary operational costs.
+                    </p>
+</div>
+</div>
+<!-- Competitive Analysis & Radar Chart Placeholder -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+<div class="lg:col-span-2 glass-panel rounded-xl p-6 border-t border-outline-variant/20">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Competitive Positioning</h3>
+<div class="flex flex-col gap-4">
+<!-- Competitor 1 -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface/50 border border-outline-variant/10">
+<div class="w-2 h-12 bg-primary rounded-full"></div>
+<div class="flex-1">
+<h4 class="font-body-base font-semibold text-on-surface">Nexus AI (Current)</h4>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-2">
+<div class="bg-primary h-2 rounded-full w-[85%]"></div>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-primary">Top Tier</span>
+</div>
+<!-- Competitor 2 -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface/30 border border-outline-variant/10">
+<div class="w-2 h-12 bg-outline rounded-full"></div>
+<div class="flex-1">
+<h4 class="font-body-base text-on-surface-variant">Competitor Alpha</h4>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-2">
+<div class="bg-outline h-2 rounded-full w-[65%]"></div>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-outline">Mid Tier</span>
+</div>
+<!-- Competitor 3 -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface/30 border border-outline-variant/10">
+<div class="w-2 h-12 bg-outline-variant rounded-full"></div>
+<div class="flex-1">
+<h4 class="font-body-base text-on-surface-variant">Legacy Solution Beta</h4>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-2">
+<div class="bg-outline-variant h-2 rounded-full w-[40%]"></div>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-outline">Low Tier</span>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-6 flex flex-col items-center justify-center relative border-t border-outline-variant/20 min-h-[300px]">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant absolute top-6 left-6 uppercase tracking-wider">Market Matrix</h3>
+<!-- Radar Chart visual placeholder -->
+<div class="radar-chart w-full h-full absolute inset-0 opacity-20 pointer-events-none rounded-xl"></div>
+<svg class="w-48 h-48 z-10 drop-shadow-[0_0_15px_rgba(37,99,235,0.5)]" viewbox="0 0 100 100">
+<polygon fill="rgba(37, 99, 235, 0.2)" points="50,10 90,40 75,90 25,90 10,40" stroke="#b4c5ff" stroke-width="1"></polygon>
+<polygon fill="rgba(87, 27, 193, 0.4)" points="50,25 75,45 65,75 35,75 25,45" stroke="#d0bcff" stroke-width="1.5"></polygon>
+<!-- Axes -->
+<line stroke="rgba(255,255,255,0.1)" stroke-width="0.5" x1="50" x2="50" y1="50" y2="10"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-width="0.5" x1="50" x2="90" y1="50" y2="40"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-width="0.5" x1="50" x2="75" y1="50" y2="90"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-width="0.5" x1="50" x2="25" y1="50" y2="90"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-width="0.5" x1="50" x2="10" y1="50" y2="40"></line>
+</svg>
+</div>
+</div>
+</div>
+</main>
+</body></html>
