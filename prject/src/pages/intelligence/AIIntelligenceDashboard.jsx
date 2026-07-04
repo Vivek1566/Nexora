@@ -99,8 +99,8 @@ export default function AIIntelligenceDashboard() {
             <ButtonPrimary className="w-full" onClick={() => navigate(`/investor/startup/${score.startupId}`)}>
               View Investment Profile
             </ButtonPrimary>
-            <ButtonSecondary className="w-full" onClick={() => navigate('/documents')}>
-              Open Data Room
+            <ButtonSecondary className="w-full" onClick={() => navigate('/help')}>
+              Open Help Center
             </ButtonSecondary>
             <ButtonSecondary className="w-full" onClick={runIntelligenceReport}>
               Generate Full Report

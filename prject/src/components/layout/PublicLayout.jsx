@@ -8,33 +8,26 @@ export function PublicLayout({ children }) {
 
   return (
     <div className="min-h-screen flex flex-col relative z-10">
-      <nav className="bg-surface/80 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/10 shadow-sm flex justify-between items-center px-gutter py-4 w-full">
-        <div className="max-w-container-max mx-auto w-full flex justify-between items-center">
-          <Link to="/" className="font-display-lg text-display-lg-mobile tracking-tighter text-primary">
-            LaunchNest
+      <nav className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-container-max items-center justify-between px-gutter py-4">
+          <Link to="/" className="text-xl font-semibold tracking-tight text-white">
+            Nexora
           </Link>
-          <ul className="hidden md:flex gap-8 items-center">
+          <ul className="hidden items-center gap-6 md:flex">
             {PUBLIC_NAV_LINKS.map((link) => (
               <li key={link.label}>
-                <Link
-                  to={link.path}
-                  className="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200"
-                >
+                <Link to={link.path} className="text-sm text-slate-300 transition hover:text-white">
                   {link.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="flex gap-4">
-            <button type="button" onClick={login} className="btn-secondary px-6 py-2 rounded-full text-white font-medium">
-              Log In
+          <div className="flex gap-3">
+            <button type="button" onClick={login} className="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-200 transition hover:bg-white/10">
+              Login
             </button>
-            <button
-              type="button"
-              onClick={getStarted}
-              className="btn-primary px-6 py-2 rounded-full text-white font-medium hidden sm:block"
-            >
-              Get Started
+            <button type="button" onClick={getStarted} className="rounded-full bg-gradient-to-r from-blue-500 to-violet-600 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-blue-500/20">
+              Get started
             </button>
           </div>
         </div>
@@ -44,20 +37,17 @@ export function PublicLayout({ children }) {
         {children}
       </div>
 
-      <footer className="bg-surface-container-lowest border-t border-outline-variant/20 py-12 mt-20 w-full px-gutter">
-        <div className="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col gap-2 text-center md:text-left">
-            <div className="font-headline-md text-headline-md text-primary">LaunchNest</div>
-            <div className="font-body-sm text-body-sm text-on-surface-variant">
-              © 2024 LaunchNest Startup Incubation. All rights reserved.
-            </div>
+      <footer className="border-t border-white/10 bg-slate-950/80 py-10 mt-16">
+        <div className="mx-auto flex max-w-container-max flex-col gap-6 px-gutter text-center md:flex-row md:items-center md:justify-between md:text-left">
+          <div>
+            <p className="text-white font-semibold">Nexora</p>
+            <p className="text-sm text-slate-400">Premium startup operating system for idea to impact.</p>
           </div>
-          <ul className="flex flex-wrap justify-center gap-6 font-label-mono text-label-mono">
-            <li><button type="button" onClick={() => notify('Privacy Policy')} className="text-on-surface-variant hover:text-tertiary transition-colors">Privacy Policy</button></li>
-            <li><button type="button" onClick={() => notify('Terms of Service')} className="text-on-surface-variant hover:text-tertiary transition-colors">Terms of Service</button></li>
-            <li><button type="button" onClick={() => notify('Cookie Policy')} className="text-on-surface-variant hover:text-tertiary transition-colors">Cookie Policy</button></li>
-            <li><button type="button" onClick={() => notify('Contact support at help@launchnest.io')} className="text-on-surface-variant hover:text-tertiary transition-colors">Contact Support</button></li>
-          </ul>
+          <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400 md:justify-end">
+            <button type="button" onClick={() => notify('Privacy policy')} className="transition hover:text-white">Privacy</button>
+            <button type="button" onClick={() => notify('Terms and conditions')} className="transition hover:text-white">Terms</button>
+            <button type="button" onClick={() => notify('Support team')} className="transition hover:text-white">Support</button>
+          </div>
         </div>
       </footer>
     </div>

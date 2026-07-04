@@ -11,9 +11,9 @@ export const RECENT_ACTIVITY = [
   {
     id: 'act-1',
     icon: 'visibility',
-    title: 'Your pitch deck was viewed',
-    description: 'Vertex Ventures reviewed your document.',
-    path: '/documents',
+    title: 'Your investor materials were reviewed',
+    description: 'Vertex Ventures asked for an updated profile summary.',
+    path: '/help',
   },
   {
     id: 'act-2',

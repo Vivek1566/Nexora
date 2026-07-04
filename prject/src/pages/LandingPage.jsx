@@ -3,6 +3,7 @@ import { PublicLayout } from '../components/layout/PublicLayout';
 import { HeroSection } from '../components/landing/HeroSection';
 import { StatsSection } from '../components/landing/StatsSection';
 import { JourneySection } from '../components/landing/JourneySection';
+import { MarketingSections } from '../components/landing/MarketingSections';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function LandingPage() {
@@ -14,6 +15,9 @@ export default function LandingPage() {
         <HeroSection />
         <StatsSection />
         <JourneySection />
+        <div className="mt-16 lg:mt-24">
+          <MarketingSections />
+        </div>
       </main>
     </PublicLayout>
   );

@@ -24,7 +24,7 @@ export default function StartupInvestmentProfile() {
           </div>
         </div>
         <div className="flex gap-4">
-          <ButtonSecondary icon="favorite_border" onClick={watchStartup}>Watch</ButtonSecondary>
+          <ButtonSecondary icon="support_agent" onClick={() => navigate('/help')}>Talk to Team</ButtonSecondary>
           <ButtonPrimary icon="payments" onClick={investNow}>Invest Now</ButtonPrimary>
         </div>
       </div>
@@ -45,23 +45,22 @@ export default function StartupInvestmentProfile() {
 
           <GlassPanel className="p-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="font-headline-md text-white">Data Room</h3>
-              <Link to="/documents">
-                <ButtonSecondary className="text-sm py-1.5 px-4 h-auto">View All</ButtonSecondary>
+              <h3 className="font-headline-md text-white">Support Desk</h3>
+              <Link to="/help">
+                <ButtonSecondary className="text-sm py-1.5 px-4 h-auto">Open Help</ButtonSecondary>
               </Link>
             </div>
-            <div className="space-y-4">
-              {['Pitch Deck Q4', 'Financial Projections'].map((doc) => (
-                <div key={doc} className="flex items-center justify-between p-4 rounded-lg bg-surface-variant/30 border border-outline-variant/10">
-                  <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-error">picture_as_pdf</span>
-                    <span className="text-white font-medium">{doc}</span>
-                  </div>
-                  <button type="button" onClick={() => downloadDoc(doc)} className="text-primary hover:text-white transition-colors">
-                    Download
-                  </button>
+            <div className="rounded-xl border border-outline-variant/20 bg-surface-variant/20 p-4 space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="material-symbols-outlined text-primary">support_agent</span>
+                <div>
+                  <p className="text-white font-medium">Need investor materials?</p>
+                  <p className="text-sm text-on-surface-variant">Our team can review your pitch, metrics, and readiness checklist.</p>
                 </div>
-              ))}
+              </div>
+              <button type="button" onClick={() => navigate('/help')} className="text-primary hover:text-white transition-colors text-sm">
+                Connect with support →
+              </button>
             </div>
           </GlassPanel>
         </div>

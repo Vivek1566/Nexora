@@ -2,11 +2,10 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { SIDEBAR_NAV_ITEMS, SETTINGS_NAV_ITEMS } from '../../data/navigation';
 import { GlassPanel } from '../ui/GlassPanel';
-import { ButtonPrimary } from '../ui/Buttons';
 import { useAppActions } from '../../hooks/useAppActions';
 
 export function SideNavBar() {
-  const { applyForFunding, notify } = useAppActions();
+  const { notify } = useAppActions();
 
   return (
     <GlassPanel className="w-64 h-[calc(100vh-48px)] sticky top-6 hidden lg:flex flex-col border-r border-outline-variant/20 p-4">
@@ -35,18 +34,11 @@ export function SideNavBar() {
         ))}
       </nav>
 
-      <div className="mt-4 mb-4">
-        <ButtonPrimary className="w-full text-sm py-2.5" icon="payments" onClick={applyForFunding}>
-          Apply for Funding
-        </ButtonPrimary>
-      </div>
-
       <div className="mt-auto border-t border-outline-variant/20 pt-4 flex flex-col gap-1">
         {SETTINGS_NAV_ITEMS.map((item) => (
           <NavLink
             key={item.label}
             to={item.path}
-            onClick={item.action === 'help' ? (e) => { e.preventDefault(); notify('Help center coming soon!'); } : undefined}
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                 isActive
