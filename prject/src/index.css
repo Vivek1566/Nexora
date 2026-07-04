@@ -7,39 +7,22 @@
 
 @layer base {
   html {
-    scroll-behavior: auto;
-  }
-
-  html.lenis,
-  html.lenis body {
-    height: auto;
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: #0b1326;
-    color: #dae2fd;
+    background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+    color: #e2e8f0;
     font-family: 'Geist', sans-serif;
   }
 }
 
 @layer components {
   .glass-panel {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .glass-panel-elevated {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-  }
-
-  .glass-card-hover:hover {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .btn-primary {
@@ -48,70 +31,27 @@
   }
 
   .btn-primary:hover {
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
-    filter: saturate(1.2);
+    box-shadow: 0 0 24px rgba(96, 165, 250, 0.24);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255,255,255,0.04);
     transition: all 0.3s ease;
   }
 
   .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-
-  /* Ambient Background */
-  .ambient-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  .ambient-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.15;
-    animation: float 20s infinite ease-in-out alternate;
-  }
-
-  .blob-1 {
-    background: #2563eb;
-    width: 600px;
-    height: 600px;
-    top: -100px;
-    left: -100px;
-  }
-
-  .blob-2 {
-    background: #8b5cf6;
-    width: 500px;
-    height: 500px;
-    bottom: 20%;
-    right: -50px;
-    animation-delay: -5s;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
   }
 }
 
 @layer utilities {
-  .shimmer {
-    background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.02) 100%);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite linear;
-  }
-
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(24px);
+    transition: all 0.8s ease;
   }
 
   .reveal.active {
@@ -119,22 +59,25 @@
     transform: translateY(0);
   }
 
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
+  .animated-bar {
+    animation: rise 700ms cubic-bezier(.2,.8,.2,1) both;
   }
+}
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 3px;
+@keyframes rise {
+  from {
+    transform: scaleY(0.2);
+    transform-origin: bottom;
+    opacity: 0.5;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 1;
   }
 }
 
 @keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, 50px) scale(1.1); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
